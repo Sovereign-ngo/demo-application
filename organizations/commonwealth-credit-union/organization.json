@@ -1,0 +1,18 @@
+{
+  "id": "commonwealth_credit_union",
+  "name": "Commonwealth Credit Union",
+  "type": "credit-union-services",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "financial-counseling",
+    "benefits-navigation",
+    "community-assistance"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

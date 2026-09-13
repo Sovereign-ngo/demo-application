@@ -1,0 +1,18 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "sovereign-demo-organization",
+  "main": "./organization-worker.js",
+  "compatibility_date": "2026-09-12",
+  "observability": { "enabled": true },
+  "vars": {
+    "DEPLOYMENT_ENVIRONMENT": "production",
+    "WEBSITE_URL": "https://demo.sovereign.ngo/",
+    "APP_URL": "https://app.demo.sovereign.ngo/",
+    "PODS_URL": "https://pods.demo.sovereign.ngo/"
+  },
+  "assets": {
+    "directory": "../organizations/nolichucky-family-clinic/dist",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  }
+}

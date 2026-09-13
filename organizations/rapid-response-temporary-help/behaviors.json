@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "rapid_response_temporary_help": {
+      "selfActions": [
+        {
+          "id": "request_temp_work_support",
+          "label": "Request temporary work support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "assess_work_availability",
+          "label": "Assess work availability"
+        },
+        {
+          "id": "match_temporary_assignment",
+          "label": "Match temporary assignment"
+        },
+        {
+          "id": "record_assignment_outcome",
+          "label": "Record assignment outcome"
+        }
+      ]
+    }
+  }
+}

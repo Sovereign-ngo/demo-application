@@ -1,1336 +1,846 @@
-x-provider-web: &provider_web
-  image: nginx:alpine
-  volumes:
-    - ../demo_webapp:/usr/share/nginx/html:ro
-
-x-provider-api: &provider_api
-  build:
-    context: ..
-    dockerfile: containerization/Dockerfile.provider-api
-  image: sovereign-provider-api:latest
-  volumes:
-    - ./certs/dev-localhost.crt:/etc/sovereign/tls/internal.crt:ro
-    - ./certs/dev-localhost.key:/etc/sovereign/tls/internal.key:ro
-
-x-provider-pod: &provider_pod
-  build:
-    context: ..
-    dockerfile: containerization/Dockerfile.solid-pod
-  image: sovereign-provider-pod:latest
-  volumes:
-    - ./certs/dev-localhost.crt:/etc/sovereign/tls/internal.crt:ro
-    - ./certs/dev-localhost.key:/etc/sovereign/tls/internal.key:ro
-  tmpfs:
-    - /data
-
 services:
-  holder_sovereign:
+  demo:
     build:
       context: ..
-      dockerfile: containerization/Dockerfile.solid-pod
-    image: sovereign-holder-sovereign:latest
-    container_name: sovereign-holder-sovereign
+      dockerfile: containerization/Dockerfile.website
+    container_name: sovereign-demo-site
     environment:
-      CSS_BASE_URL: https://localhost:8180/
-    volumes:
-      - ./certs/dev-localhost.crt:/etc/sovereign/tls/internal.crt:ro
-      - ./certs/dev-localhost.key:/etc/sovereign/tls/internal.key:ro
-    tmpfs:
-      - /data
-
-  standards_service:
-    build:
-      context: ..
-      dockerfile: containerization/Dockerfile.standards
-    image: sovereign-standards-service:latest
-    container_name: sovereign-standards-service
-    environment:
-      PORT: 8090
-      DID_DOMAIN: 'demo.sovereign.ngo'
-      STANDARDS_DATA_DIR: '/app/data'
-      STATE_SOURCE_URL: 'http://holder_sovereign:3001/sovereign/demo/state.json'
-    volumes:
-      - ../demo_webapp/data:/app/data:ro
-
-  sovereign_gateway:
-    image: nginx:alpine
-    container_name: sovereign-gateway
-    depends_on:
-      - holder_sovereign
-      - standards_service
-      - provider_web_nolichucky_family_clinic
-      - provider_api_nolichucky_family_clinic
-      - provider_pod_nolichucky_family_clinic
-      - provider_web_riverbend_dental_clinic
-      - provider_api_riverbend_dental_clinic
-      - provider_pod_riverbend_dental_clinic
-      - provider_web_riverstone_radiology_center
-      - provider_api_riverstone_radiology_center
-      - provider_pod_riverstone_radiology_center
-      - provider_web_summitview_emergency_department
-      - provider_api_summitview_emergency_department
-      - provider_pod_summitview_emergency_department
-      - provider_web_fairmannor_house
-      - provider_api_fairmannor_house
-      - provider_pod_fairmannor_house
-      - provider_web_safeharbor_shelter
-      - provider_api_safeharbor_shelter
-      - provider_pod_safeharbor_shelter
-      - provider_web_community_food_pantry
-      - provider_api_community_food_pantry
-      - provider_pod_community_food_pantry
-      - provider_web_bridgeway_family_services
-      - provider_api_bridgeway_family_services
-      - provider_pod_bridgeway_family_services
-      - provider_web_family_mediation_center
-      - provider_api_family_mediation_center
-      - provider_pod_family_mediation_center
-      - provider_web_salutation_army
-      - provider_api_salutation_army
-      - provider_pod_salutation_army
-      - provider_web_pioneer_legal_benefits_navigation
-      - provider_api_pioneer_legal_benefits_navigation
-      - provider_pod_pioneer_legal_benefits_navigation
-      - provider_web_tenant_rights_advocacy_network
-      - provider_api_tenant_rights_advocacy_network
-      - provider_pod_tenant_rights_advocacy_network
-      - provider_web_community_legal_family_support
-      - provider_api_community_legal_family_support
-      - provider_pod_community_legal_family_support
-      - provider_web_financial_wellness_center
-      - provider_api_financial_wellness_center
-      - provider_pod_financial_wellness_center
-      - provider_web_community_tax_services
-      - provider_api_community_tax_services
-      - provider_pod_community_tax_services
-      - provider_web_consumer_regulation_support
-      - provider_api_consumer_regulation_support
-      - provider_pod_consumer_regulation_support
-      - provider_web_commonwealth_credit_union
-      - provider_api_commonwealth_credit_union
-      - provider_pod_commonwealth_credit_union
-      - provider_web_neighborhood_insurance_brokers
-      - provider_api_neighborhood_insurance_brokers
-      - provider_pod_neighborhood_insurance_brokers
-      - provider_web_valley_notary_office
-      - provider_api_valley_notary_office
-      - provider_pod_valley_notary_office
-      - provider_web_community_legal_aid_collective
-      - provider_api_community_legal_aid_collective
-      - provider_pod_community_legal_aid_collective
-      - provider_web_ascent_employment_placement_agency
-      - provider_api_ascent_employment_placement_agency
-      - provider_pod_ascent_employment_placement_agency
-      - provider_web_rapid_response_temporary_help
-      - provider_api_rapid_response_temporary_help
-      - provider_pod_rapid_response_temporary_help
-      - provider_web_cedar_document_preparation_center
-      - provider_api_cedar_document_preparation_center
-      - provider_pod_cedar_document_preparation_center
-      - provider_web_brightpath_educational_support_center
-      - provider_api_brightpath_educational_support_center
-      - provider_pod_brightpath_educational_support_center
-      - provider_web_ridgeview_behavioral_health_center
-      - provider_api_ridgeview_behavioral_health_center
-      - provider_pod_ridgeview_behavioral_health_center
-      - provider_web_bluepeak_medical_laboratory
-      - provider_api_bluepeak_medical_laboratory
-      - provider_pod_bluepeak_medical_laboratory
-      - provider_web_caringhands_home_health
-      - provider_api_caringhands_home_health
-      - provider_pod_caringhands_home_health
-      - provider_web_tri_county_ambulance
-      - provider_api_tri_county_ambulance
-      - provider_pod_tri_county_ambulance
-      - provider_web_foothills_disability_support_services
-      - provider_api_foothills_disability_support_services
-      - provider_pod_foothills_disability_support_services
-      - provider_web_pathway_vocational_rehabilitation
-      - provider_api_pathway_vocational_rehabilitation
-      - provider_pod_pathway_vocational_rehabilitation
-      - provider_web_dignity_human_rights_organization
-      - provider_api_dignity_human_rights_organization
-      - provider_pod_dignity_human_rights_organization
-      - provider_web_appalachian_electric_distribution
-      - provider_api_appalachian_electric_distribution
-      - provider_pod_appalachian_electric_distribution
-      - provider_web_holston_wireless_carrier
-      - provider_api_holston_wireless_carrier
-      - provider_pod_holston_wireless_carrier
-      - provider_web_blue_river_natural_gas_utility
-      - provider_api_blue_river_natural_gas_utility
-      - provider_pod_blue_river_natural_gas_utility
-      - provider_web_volunteer_electrical_contractors
-      - provider_api_volunteer_electrical_contractors
-      - provider_pod_volunteer_electrical_contractors
-      - provider_web_foothills_plumbing_hvac_contractors
-      - provider_api_foothills_plumbing_hvac_contractors
-      - provider_pod_foothills_plumbing_hvac_contractors
-      - provider_web_clearwater_public_water_utility
-      - provider_api_clearwater_public_water_utility
-      - provider_pod_clearwater_public_water_utility
-      - provider_web_mainstreet_community_pharmacy
-      - provider_api_mainstreet_community_pharmacy
-      - provider_pod_mainstreet_community_pharmacy
-      - provider_web_homestead_residential_leasing
-      - provider_api_homestead_residential_leasing
-      - provider_pod_homestead_residential_leasing
-      - provider_web_cornerstone_property_management
-      - provider_api_cornerstone_property_management
-      - provider_pod_cornerstone_property_management
-      - provider_web_summit_health_insurance_carrier
-      - provider_api_summit_health_insurance_carrier
-      - provider_pod_summit_health_insurance_carrier
-      - provider_web_atlas_claims_administration
-      - provider_api_atlas_claims_administration
-      - provider_pod_atlas_claims_administration
-      - provider_web_sunrise_child_day_center
-      - provider_api_sunrise_child_day_center
-      - provider_pod_sunrise_child_day_center
-      - provider_web_youthpath_child_services
-      - provider_api_youthpath_child_services
-      - provider_pod_youthpath_child_services
-      - provider_web_beacon_emergency_relief_services
-      - provider_api_beacon_emergency_relief_services
-      - provider_pod_beacon_emergency_relief_services
-      - provider_web_horizon_residential_recovery_center
-      - provider_api_horizon_residential_recovery_center
-      - provider_pod_horizon_residential_recovery_center
-      - provider_web_highland_workforce_training_institute
-      - provider_api_highland_workforce_training_institute
-      - provider_pod_highland_workforce_training_institute
-    volumes:
-      - ./sovereign-gateway.nginx.conf:/etc/nginx/conf.d/default.conf:ro
-      - ./certs/dev-localhost.crt:/etc/nginx/certs/dev-localhost.crt:ro
-      - ./certs/dev-localhost.key:/etc/nginx/certs/dev-localhost.key:ro
-      - ../demo_webapp:/srv/demo_webapp:ro
+      DEPLOYMENT_ENVIRONMENT: local
+      APP_URL: http://localhost:8081/
     ports:
-      - "8180:443"
-
-  provider_web_nolichucky_family_clinic:
-    <<: *provider_web
-    container_name: sovereign-provider-web-nolichucky-family-clinic
-
-  provider_api_nolichucky_family_clinic:
-    <<: *provider_api
-    container_name: sovereign-provider-api-nolichucky-family-clinic
-    depends_on:
-      - provider_pod_nolichucky_family_clinic
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'nolichucky_family_clinic'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:nolichucky_family_clinic'
-      PROVIDER_LABEL: 'Nolichucky Family Clinic (621111 - Offices of Physicians)'
-      PROVIDER_TYPE: 'primary-care'
-      PROVIDER_POD_URL: 'https://provider_pod_nolichucky_family_clinic:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_nolichucky_family_clinic:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-nolichucky-family-clinic
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_nolichucky_family_clinic:3000/'
-
-  provider_web_riverbend_dental_clinic:
-    <<: *provider_web
-    container_name: sovereign-provider-web-riverbend-dental-clinic
-
-  provider_api_riverbend_dental_clinic:
-    <<: *provider_api
-    container_name: sovereign-provider-api-riverbend-dental-clinic
-    depends_on:
-      - provider_pod_riverbend_dental_clinic
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'riverbend_dental_clinic'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:riverbend_dental_clinic'
-      PROVIDER_LABEL: 'Riverbend Dental Clinic (621210 - Offices of Dentists)'
-      PROVIDER_TYPE: 'dental-care-services'
-      PROVIDER_POD_URL: 'https://provider_pod_riverbend_dental_clinic:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_riverbend_dental_clinic:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-riverbend-dental-clinic
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_riverbend_dental_clinic:3000/'
-
-  provider_web_riverstone_radiology_center:
-    <<: *provider_web
-    container_name: sovereign-provider-web-riverstone-radiology-center
-
-  provider_api_riverstone_radiology_center:
-    <<: *provider_api
-    container_name: sovereign-provider-api-riverstone-radiology-center
-    depends_on:
-      - provider_pod_riverstone_radiology_center
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'riverstone_radiology_center'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:riverstone_radiology_center'
-      PROVIDER_LABEL: 'Riverstone Radiology Center (621512 - Diagnostic Imaging Centers)'
-      PROVIDER_TYPE: 'imaging-services'
-      PROVIDER_POD_URL: 'https://provider_pod_riverstone_radiology_center:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_riverstone_radiology_center:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-riverstone-radiology-center
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_riverstone_radiology_center:3000/'
-
-  provider_web_summitview_emergency_department:
-    <<: *provider_web
-    container_name: sovereign-provider-web-summitview-emergency-department
-
-  provider_api_summitview_emergency_department:
-    <<: *provider_api
-    container_name: sovereign-provider-api-summitview-emergency-department
-    depends_on:
-      - provider_pod_summitview_emergency_department
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'summitview_emergency_department'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:summitview_emergency_department'
-      PROVIDER_LABEL: 'Summitview Emergency Department (622110 - General Medical and Surgical Hospitals)'
-      PROVIDER_TYPE: 'acute-emergency-care'
-      PROVIDER_POD_URL: 'https://provider_pod_summitview_emergency_department:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_summitview_emergency_department:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-summitview-emergency-department
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_summitview_emergency_department:3000/'
-
-  provider_web_fairmannor_house:
-    <<: *provider_web
-    container_name: sovereign-provider-web-fairmannor-house
-
-  provider_api_fairmannor_house:
-    <<: *provider_api
-    container_name: sovereign-provider-api-fairmannor-house
-    depends_on:
-      - provider_pod_fairmannor_house
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'fairmannor_house'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:fairmannor_house'
-      PROVIDER_LABEL: 'FairMannor House (624229 - Other Community Housing Services)'
-      PROVIDER_TYPE: 'homelessness-prevention'
-      PROVIDER_POD_URL: 'https://provider_pod_fairmannor_house:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_fairmannor_house:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-fairmannor-house
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_fairmannor_house:3000/'
-
-  provider_web_safeharbor_shelter:
-    <<: *provider_web
-    container_name: sovereign-provider-web-safeharbor-shelter
-
-  provider_api_safeharbor_shelter:
-    <<: *provider_api
-    container_name: sovereign-provider-api-safeharbor-shelter
-    depends_on:
-      - provider_pod_safeharbor_shelter
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'safeharbor_shelter'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:safeharbor_shelter'
-      PROVIDER_LABEL: 'SafeHarbor Shelter (624221 - Temporary Shelters)'
-      PROVIDER_TYPE: 'emergency-shelter'
-      PROVIDER_POD_URL: 'https://provider_pod_safeharbor_shelter:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_safeharbor_shelter:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-safeharbor-shelter
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_safeharbor_shelter:3000/'
-
-  provider_web_community_food_pantry:
-    <<: *provider_web
-    container_name: sovereign-provider-web-community-food-pantry
-
-  provider_api_community_food_pantry:
-    <<: *provider_api
-    container_name: sovereign-provider-api-community-food-pantry
-    depends_on:
-      - provider_pod_community_food_pantry
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'community_food_pantry'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:community_food_pantry'
-      PROVIDER_LABEL: 'Community Food Pantry (624210 - Community Food Services)'
-      PROVIDER_TYPE: 'food-assistance'
-      PROVIDER_POD_URL: 'https://provider_pod_community_food_pantry:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_community_food_pantry:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-community-food-pantry
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_community_food_pantry:3000/'
-
-  provider_web_bridgeway_family_services:
-    <<: *provider_web
-    container_name: sovereign-provider-web-bridgeway-family-services
-
-  provider_api_bridgeway_family_services:
-    <<: *provider_api
-    container_name: sovereign-provider-api-bridgeway-family-services
-    depends_on:
-      - provider_pod_bridgeway_family_services
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'bridgeway_family_services'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:bridgeway_family_services'
-      PROVIDER_LABEL: 'Bridgeway Family Services (624190 - Other Individual and Family Services)'
-      PROVIDER_TYPE: 'family-stabilization'
-      PROVIDER_POD_URL: 'https://provider_pod_bridgeway_family_services:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_bridgeway_family_services:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-bridgeway-family-services
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_bridgeway_family_services:3000/'
-
-  provider_web_family_mediation_center:
-    <<: *provider_web
-    container_name: sovereign-provider-web-family-mediation-center
-
-  provider_api_family_mediation_center:
-    <<: *provider_api
-    container_name: sovereign-provider-api-family-mediation-center
-    depends_on:
-      - provider_pod_family_mediation_center
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'family_mediation_center'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:family_mediation_center'
-      PROVIDER_LABEL: 'Family Mediation Center (624190 - Other Individual and Family Services)'
-      PROVIDER_TYPE: 'family-mediation'
-      PROVIDER_POD_URL: 'https://provider_pod_family_mediation_center:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_family_mediation_center:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-family-mediation-center
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_family_mediation_center:3000/'
-
-  provider_web_salutation_army:
-    <<: *provider_web
-    container_name: sovereign-provider-web-salutation-army
-
-  provider_api_salutation_army:
-    <<: *provider_api
-    container_name: sovereign-provider-api-salutation-army
-    depends_on:
-      - provider_pod_salutation_army
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'salutation_army'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:salutation_army'
-      PROVIDER_LABEL: 'Salutation Army (624190 - Other Individual and Family Services)'
-      PROVIDER_TYPE: 'community-assistance'
-      PROVIDER_POD_URL: 'https://provider_pod_salutation_army:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_salutation_army:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-salutation-army
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_salutation_army:3000/'
-
-  provider_web_pioneer_legal_benefits_navigation:
-    <<: *provider_web
-    container_name: sovereign-provider-web-pioneer-legal-benefits-navigation
-
-  provider_api_pioneer_legal_benefits_navigation:
-    <<: *provider_api
-    container_name: sovereign-provider-api-pioneer-legal-benefits-navigation
-    depends_on:
-      - provider_pod_pioneer_legal_benefits_navigation
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'pioneer_legal_benefits_navigation'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:pioneer_legal_benefits_navigation'
-      PROVIDER_LABEL: 'Pioneer Legal and Benefits Navigation (541110 - Offices of Lawyers)'
-      PROVIDER_TYPE: 'legal-and-benefits-navigation'
-      PROVIDER_POD_URL: 'https://provider_pod_pioneer_legal_benefits_navigation:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_pioneer_legal_benefits_navigation:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-pioneer-legal-benefits-navigation
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_pioneer_legal_benefits_navigation:3000/'
-
-  provider_web_tenant_rights_advocacy_network:
-    <<: *provider_web
-    container_name: sovereign-provider-web-tenant-rights-advocacy-network
-
-  provider_api_tenant_rights_advocacy_network:
-    <<: *provider_api
-    container_name: sovereign-provider-api-tenant-rights-advocacy-network
-    depends_on:
-      - provider_pod_tenant_rights_advocacy_network
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'tenant_rights_advocacy_network'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:tenant_rights_advocacy_network'
-      PROVIDER_LABEL: 'Tenant Rights Advocacy Network (813319 - Other Social Advocacy Organizations)'
-      PROVIDER_TYPE: 'legal-advocacy'
-      PROVIDER_POD_URL: 'https://provider_pod_tenant_rights_advocacy_network:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_tenant_rights_advocacy_network:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-tenant-rights-advocacy-network
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_tenant_rights_advocacy_network:3000/'
-
-  provider_web_community_legal_family_support:
-    <<: *provider_web
-    container_name: sovereign-provider-web-community-legal-family-support
-
-  provider_api_community_legal_family_support:
-    <<: *provider_api
-    container_name: sovereign-provider-api-community-legal-family-support
-    depends_on:
-      - provider_pod_community_legal_family_support
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'community_legal_family_support'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:community_legal_family_support'
-      PROVIDER_LABEL: 'Community Legal and Family Support Services (624190 - Other Individual and Family Services)'
-      PROVIDER_TYPE: 'legal-family-support'
-      PROVIDER_POD_URL: 'https://provider_pod_community_legal_family_support:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_community_legal_family_support:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-community-legal-family-support
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_community_legal_family_support:3000/'
-
-  provider_web_financial_wellness_center:
-    <<: *provider_web
-    container_name: sovereign-provider-web-financial-wellness-center
-
-  provider_api_financial_wellness_center:
-    <<: *provider_api
-    container_name: sovereign-provider-api-financial-wellness-center
-    depends_on:
-      - provider_pod_financial_wellness_center
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'financial_wellness_center'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:financial_wellness_center'
-      PROVIDER_LABEL: 'Financial Wellness Center (523930 - Investment Advice)'
-      PROVIDER_TYPE: 'money-management'
-      PROVIDER_POD_URL: 'https://provider_pod_financial_wellness_center:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_financial_wellness_center:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-financial-wellness-center
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_financial_wellness_center:3000/'
-
-  provider_web_community_tax_services:
-    <<: *provider_web
-    container_name: sovereign-provider-web-community-tax-services
-
-  provider_api_community_tax_services:
-    <<: *provider_api
-    container_name: sovereign-provider-api-community-tax-services
-    depends_on:
-      - provider_pod_community_tax_services
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'community_tax_services'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:community_tax_services'
-      PROVIDER_LABEL: 'Community Tax Services (541213 - Tax Preparation Services)'
-      PROVIDER_TYPE: 'tax-services'
-      PROVIDER_POD_URL: 'https://provider_pod_community_tax_services:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_community_tax_services:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-community-tax-services
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_community_tax_services:3000/'
-
-  provider_web_consumer_regulation_support:
-    <<: *provider_web
-    container_name: sovereign-provider-web-consumer-regulation-support
-
-  provider_api_consumer_regulation_support:
-    <<: *provider_api
-    container_name: sovereign-provider-api-consumer-regulation-support
-    depends_on:
-      - provider_pod_consumer_regulation_support
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'consumer_regulation_support'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:consumer_regulation_support'
-      PROVIDER_LABEL: 'Consumer Regulation Support Office (813319 - Other Social Advocacy Organizations)'
-      PROVIDER_TYPE: 'consumer-regulation'
-      PROVIDER_POD_URL: 'https://provider_pod_consumer_regulation_support:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_consumer_regulation_support:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-consumer-regulation-support
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_consumer_regulation_support:3000/'
-
-  provider_web_commonwealth_credit_union:
-    <<: *provider_web
-    container_name: sovereign-provider-web-commonwealth-credit-union
-
-  provider_api_commonwealth_credit_union:
-    <<: *provider_api
-    container_name: sovereign-provider-api-commonwealth-credit-union
-    depends_on:
-      - provider_pod_commonwealth_credit_union
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'commonwealth_credit_union'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:commonwealth_credit_union'
-      PROVIDER_LABEL: 'Commonwealth Credit Union (522130 - Credit Unions)'
-      PROVIDER_TYPE: 'credit-union-services'
-      PROVIDER_POD_URL: 'https://provider_pod_commonwealth_credit_union:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_commonwealth_credit_union:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-commonwealth-credit-union
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_commonwealth_credit_union:3000/'
-
-  provider_web_neighborhood_insurance_brokers:
-    <<: *provider_web
-    container_name: sovereign-provider-web-neighborhood-insurance-brokers
-
-  provider_api_neighborhood_insurance_brokers:
-    <<: *provider_api
-    container_name: sovereign-provider-api-neighborhood-insurance-brokers
-    depends_on:
-      - provider_pod_neighborhood_insurance_brokers
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'neighborhood_insurance_brokers'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:neighborhood_insurance_brokers'
-      PROVIDER_LABEL: 'Neighborhood Insurance Brokers (524210 - Insurance Agencies and Brokerages)'
-      PROVIDER_TYPE: 'insurance-brokerage'
-      PROVIDER_POD_URL: 'https://provider_pod_neighborhood_insurance_brokers:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_neighborhood_insurance_brokers:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-neighborhood-insurance-brokers
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_neighborhood_insurance_brokers:3000/'
-
-  provider_web_valley_notary_office:
-    <<: *provider_web
-    container_name: sovereign-provider-web-valley-notary-office
-
-  provider_api_valley_notary_office:
-    <<: *provider_api
-    container_name: sovereign-provider-api-valley-notary-office
-    depends_on:
-      - provider_pod_valley_notary_office
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'valley_notary_office'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:valley_notary_office'
-      PROVIDER_LABEL: 'Valley Notary Office (541120 - Offices of Notaries)'
-      PROVIDER_TYPE: 'notary-services'
-      PROVIDER_POD_URL: 'https://provider_pod_valley_notary_office:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_valley_notary_office:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-valley-notary-office
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_valley_notary_office:3000/'
-
-  provider_web_community_legal_aid_collective:
-    <<: *provider_web
-    container_name: sovereign-provider-web-community-legal-aid-collective
-
-  provider_api_community_legal_aid_collective:
-    <<: *provider_api
-    container_name: sovereign-provider-api-community-legal-aid-collective
-    depends_on:
-      - provider_pod_community_legal_aid_collective
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'community_legal_aid_collective'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:community_legal_aid_collective'
-      PROVIDER_LABEL: 'Community Legal Aid Collective (541199 - All Other Legal Services)'
-      PROVIDER_TYPE: 'legal-aid-services'
-      PROVIDER_POD_URL: 'https://provider_pod_community_legal_aid_collective:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_community_legal_aid_collective:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-community-legal-aid-collective
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_community_legal_aid_collective:3000/'
-
-  provider_web_ascent_employment_placement_agency:
-    <<: *provider_web
-    container_name: sovereign-provider-web-ascent-employment-placement-agency
-
-  provider_api_ascent_employment_placement_agency:
-    <<: *provider_api
-    container_name: sovereign-provider-api-ascent-employment-placement-agency
-    depends_on:
-      - provider_pod_ascent_employment_placement_agency
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'ascent_employment_placement_agency'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:ascent_employment_placement_agency'
-      PROVIDER_LABEL: 'Ascent Employment Placement Agency (561311 - Employment Placement Agencies)'
-      PROVIDER_TYPE: 'employment-placement'
-      PROVIDER_POD_URL: 'https://provider_pod_ascent_employment_placement_agency:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_ascent_employment_placement_agency:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-ascent-employment-placement-agency
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_ascent_employment_placement_agency:3000/'
-
-  provider_web_rapid_response_temporary_help:
-    <<: *provider_web
-    container_name: sovereign-provider-web-rapid-response-temporary-help
-
-  provider_api_rapid_response_temporary_help:
-    <<: *provider_api
-    container_name: sovereign-provider-api-rapid-response-temporary-help
-    depends_on:
-      - provider_pod_rapid_response_temporary_help
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'rapid_response_temporary_help'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:rapid_response_temporary_help'
-      PROVIDER_LABEL: 'Rapid Response Temporary Help (561320 - Temporary Help Services)'
-      PROVIDER_TYPE: 'temporary-help-services'
-      PROVIDER_POD_URL: 'https://provider_pod_rapid_response_temporary_help:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_rapid_response_temporary_help:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-rapid-response-temporary-help
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_rapid_response_temporary_help:3000/'
-
-  provider_web_cedar_document_preparation_center:
-    <<: *provider_web
-    container_name: sovereign-provider-web-cedar-document-preparation-center
-
-  provider_api_cedar_document_preparation_center:
-    <<: *provider_api
-    container_name: sovereign-provider-api-cedar-document-preparation-center
-    depends_on:
-      - provider_pod_cedar_document_preparation_center
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'cedar_document_preparation_center'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:cedar_document_preparation_center'
-      PROVIDER_LABEL: 'Cedar Document Preparation Center (561410 - Document Preparation Services)'
-      PROVIDER_TYPE: 'document-preparation-services'
-      PROVIDER_POD_URL: 'https://provider_pod_cedar_document_preparation_center:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_cedar_document_preparation_center:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-cedar-document-preparation-center
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_cedar_document_preparation_center:3000/'
-
-  provider_web_brightpath_educational_support_center:
-    <<: *provider_web
-    container_name: sovereign-provider-web-brightpath-educational-support-center
-
-  provider_api_brightpath_educational_support_center:
-    <<: *provider_api
-    container_name: sovereign-provider-api-brightpath-educational-support-center
-    depends_on:
-      - provider_pod_brightpath_educational_support_center
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'brightpath_educational_support_center'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:brightpath_educational_support_center'
-      PROVIDER_LABEL: 'BrightPath Educational Support Center (611710 - Educational Support Services)'
-      PROVIDER_TYPE: 'educational-support-services'
-      PROVIDER_POD_URL: 'https://provider_pod_brightpath_educational_support_center:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_brightpath_educational_support_center:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-brightpath-educational-support-center
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_brightpath_educational_support_center:3000/'
-
-  provider_web_ridgeview_behavioral_health_center:
-    <<: *provider_web
-    container_name: sovereign-provider-web-ridgeview-behavioral-health-center
-
-  provider_api_ridgeview_behavioral_health_center:
-    <<: *provider_api
-    container_name: sovereign-provider-api-ridgeview-behavioral-health-center
-    depends_on:
-      - provider_pod_ridgeview_behavioral_health_center
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'ridgeview_behavioral_health_center'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:ridgeview_behavioral_health_center'
-      PROVIDER_LABEL: 'Ridgeview Behavioral Health Center (621420 - Outpatient Mental Health and Substance Abuse Centers)'
-      PROVIDER_TYPE: 'outpatient-behavioral-health'
-      PROVIDER_POD_URL: 'https://provider_pod_ridgeview_behavioral_health_center:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_ridgeview_behavioral_health_center:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-ridgeview-behavioral-health-center
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_ridgeview_behavioral_health_center:3000/'
-
-  provider_web_bluepeak_medical_laboratory:
-    <<: *provider_web
-    container_name: sovereign-provider-web-bluepeak-medical-laboratory
-
-  provider_api_bluepeak_medical_laboratory:
-    <<: *provider_api
-    container_name: sovereign-provider-api-bluepeak-medical-laboratory
-    depends_on:
-      - provider_pod_bluepeak_medical_laboratory
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'bluepeak_medical_laboratory'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:bluepeak_medical_laboratory'
-      PROVIDER_LABEL: 'BluePeak Medical Laboratory (621511 - Medical Laboratories)'
-      PROVIDER_TYPE: 'medical-laboratory-services'
-      PROVIDER_POD_URL: 'https://provider_pod_bluepeak_medical_laboratory:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_bluepeak_medical_laboratory:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-bluepeak-medical-laboratory
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_bluepeak_medical_laboratory:3000/'
-
-  provider_web_caringhands_home_health:
-    <<: *provider_web
-    container_name: sovereign-provider-web-caringhands-home-health
-
-  provider_api_caringhands_home_health:
-    <<: *provider_api
-    container_name: sovereign-provider-api-caringhands-home-health
-    depends_on:
-      - provider_pod_caringhands_home_health
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'caringhands_home_health'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:caringhands_home_health'
-      PROVIDER_LABEL: 'CaringHands Home Health (621610 - Home Health Care Services)'
-      PROVIDER_TYPE: 'home-health-care'
-      PROVIDER_POD_URL: 'https://provider_pod_caringhands_home_health:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_caringhands_home_health:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-caringhands-home-health
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_caringhands_home_health:3000/'
-
-  provider_web_tri_county_ambulance:
-    <<: *provider_web
-    container_name: sovereign-provider-web-tri-county-ambulance
-
-  provider_api_tri_county_ambulance:
-    <<: *provider_api
-    container_name: sovereign-provider-api-tri-county-ambulance
-    depends_on:
-      - provider_pod_tri_county_ambulance
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'tri_county_ambulance'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:tri_county_ambulance'
-      PROVIDER_LABEL: 'Tri-County Ambulance (621911 - Ambulance Services)'
-      PROVIDER_TYPE: 'ambulance-services'
-      PROVIDER_POD_URL: 'https://provider_pod_tri_county_ambulance:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_tri_county_ambulance:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-tri-county-ambulance
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_tri_county_ambulance:3000/'
-
-  provider_web_foothills_disability_support_services:
-    <<: *provider_web
-    container_name: sovereign-provider-web-foothills-disability-support-services
-
-  provider_api_foothills_disability_support_services:
-    <<: *provider_api
-    container_name: sovereign-provider-api-foothills-disability-support-services
-    depends_on:
-      - provider_pod_foothills_disability_support_services
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'foothills_disability_support_services'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:foothills_disability_support_services'
-      PROVIDER_LABEL: 'Foothills Disability Support Services (624120 - Services for the Elderly and Persons with Disabilities)'
-      PROVIDER_TYPE: 'disability-support-services'
-      PROVIDER_POD_URL: 'https://provider_pod_foothills_disability_support_services:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_foothills_disability_support_services:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-foothills-disability-support-services
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_foothills_disability_support_services:3000/'
-
-  provider_web_pathway_vocational_rehabilitation:
-    <<: *provider_web
-    container_name: sovereign-provider-web-pathway-vocational-rehabilitation
-
-  provider_api_pathway_vocational_rehabilitation:
-    <<: *provider_api
-    container_name: sovereign-provider-api-pathway-vocational-rehabilitation
-    depends_on:
-      - provider_pod_pathway_vocational_rehabilitation
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'pathway_vocational_rehabilitation'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:pathway_vocational_rehabilitation'
-      PROVIDER_LABEL: 'Pathway Vocational Rehabilitation (624310 - Vocational Rehabilitation Services)'
-      PROVIDER_TYPE: 'vocational-rehabilitation'
-      PROVIDER_POD_URL: 'https://provider_pod_pathway_vocational_rehabilitation:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_pathway_vocational_rehabilitation:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-pathway-vocational-rehabilitation
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_pathway_vocational_rehabilitation:3000/'
-
-  provider_web_dignity_human_rights_organization:
-    <<: *provider_web
-    container_name: sovereign-provider-web-dignity-human-rights-organization
-
-  provider_api_dignity_human_rights_organization:
-    <<: *provider_api
-    container_name: sovereign-provider-api-dignity-human-rights-organization
-    depends_on:
-      - provider_pod_dignity_human_rights_organization
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'dignity_human_rights_organization'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:dignity_human_rights_organization'
-      PROVIDER_LABEL: 'Dignity Human Rights Organization (813311 - Human Rights Organizations)'
-      PROVIDER_TYPE: 'human-rights-advocacy'
-      PROVIDER_POD_URL: 'https://provider_pod_dignity_human_rights_organization:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_dignity_human_rights_organization:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-dignity-human-rights-organization
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_dignity_human_rights_organization:3000/'
-
-  provider_web_appalachian_electric_distribution:
-    <<: *provider_web
-    container_name: sovereign-provider-web-appalachian-electric-distribution
-
-  provider_api_appalachian_electric_distribution:
-    <<: *provider_api
-    container_name: sovereign-provider-api-appalachian-electric-distribution
-    depends_on:
-      - provider_pod_appalachian_electric_distribution
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'appalachian_electric_distribution'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:appalachian_electric_distribution'
-      PROVIDER_LABEL: 'Appalachian Electric Distribution (221122 - Electric Power Distribution)'
-      PROVIDER_TYPE: 'electric-utility-services'
-      PROVIDER_POD_URL: 'https://provider_pod_appalachian_electric_distribution:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_appalachian_electric_distribution:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-appalachian-electric-distribution
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_appalachian_electric_distribution:3000/'
-
-  provider_web_holston_wireless_carrier:
-    <<: *provider_web
-    container_name: sovereign-provider-web-holston-wireless-carrier
-
-  provider_api_holston_wireless_carrier:
-    <<: *provider_api
-    container_name: sovereign-provider-api-holston-wireless-carrier
-    depends_on:
-      - provider_pod_holston_wireless_carrier
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'holston_wireless_carrier'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:holston_wireless_carrier'
-      PROVIDER_LABEL: 'Holston Wireless Carrier (517312 - Wireless Telecommunications Carriers (except Satellite))'
-      PROVIDER_TYPE: 'wireless-telecommunications-services'
-      PROVIDER_POD_URL: 'https://provider_pod_holston_wireless_carrier:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_holston_wireless_carrier:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-holston-wireless-carrier
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_holston_wireless_carrier:3000/'
-
-  provider_web_blue_river_natural_gas_utility:
-    <<: *provider_web
-    container_name: sovereign-provider-web-blue-river-natural-gas-utility
-
-  provider_api_blue_river_natural_gas_utility:
-    <<: *provider_api
-    container_name: sovereign-provider-api-blue-river-natural-gas-utility
-    depends_on:
-      - provider_pod_blue_river_natural_gas_utility
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'blue_river_natural_gas_utility'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:blue_river_natural_gas_utility'
-      PROVIDER_LABEL: 'Blue River Natural Gas Utility (221210 - Natural Gas Distribution)'
-      PROVIDER_TYPE: 'natural-gas-utility-services'
-      PROVIDER_POD_URL: 'https://provider_pod_blue_river_natural_gas_utility:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_blue_river_natural_gas_utility:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-blue-river-natural-gas-utility
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_blue_river_natural_gas_utility:3000/'
-
-  provider_web_volunteer_electrical_contractors:
-    <<: *provider_web
-    container_name: sovereign-provider-web-volunteer-electrical-contractors
-
-  provider_api_volunteer_electrical_contractors:
-    <<: *provider_api
-    container_name: sovereign-provider-api-volunteer-electrical-contractors
-    depends_on:
-      - provider_pod_volunteer_electrical_contractors
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'volunteer_electrical_contractors'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:volunteer_electrical_contractors'
-      PROVIDER_LABEL: 'Volunteer Electrical Contractors (238210 - Electrical Contractors and Other Wiring Installation Contractors)'
-      PROVIDER_TYPE: 'electrical-contractor-services'
-      PROVIDER_POD_URL: 'https://provider_pod_volunteer_electrical_contractors:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_volunteer_electrical_contractors:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-volunteer-electrical-contractors
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_volunteer_electrical_contractors:3000/'
-
-  provider_web_foothills_plumbing_hvac_contractors:
-    <<: *provider_web
-    container_name: sovereign-provider-web-foothills-plumbing-hvac-contractors
-
-  provider_api_foothills_plumbing_hvac_contractors:
-    <<: *provider_api
-    container_name: sovereign-provider-api-foothills-plumbing-hvac-contractors
-    depends_on:
-      - provider_pod_foothills_plumbing_hvac_contractors
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'foothills_plumbing_hvac_contractors'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:foothills_plumbing_hvac_contractors'
-      PROVIDER_LABEL: 'Foothills Plumbing, Heating, and Air Contractors (238220 - Plumbing, Heating, and Air-Conditioning Contractors)'
-      PROVIDER_TYPE: 'plumbing-hvac-contractor-services'
-      PROVIDER_POD_URL: 'https://provider_pod_foothills_plumbing_hvac_contractors:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_foothills_plumbing_hvac_contractors:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-foothills-plumbing-hvac-contractors
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_foothills_plumbing_hvac_contractors:3000/'
-
-  provider_web_clearwater_public_water_utility:
-    <<: *provider_web
-    container_name: sovereign-provider-web-clearwater-public-water-utility
-
-  provider_api_clearwater_public_water_utility:
-    <<: *provider_api
-    container_name: sovereign-provider-api-clearwater-public-water-utility
-    depends_on:
-      - provider_pod_clearwater_public_water_utility
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'clearwater_public_water_utility'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:clearwater_public_water_utility'
-      PROVIDER_LABEL: 'Clearwater Public Water Utility (221310 - Water Supply and Irrigation Systems)'
-      PROVIDER_TYPE: 'water-utility-services'
-      PROVIDER_POD_URL: 'https://provider_pod_clearwater_public_water_utility:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_clearwater_public_water_utility:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-clearwater-public-water-utility
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_clearwater_public_water_utility:3000/'
-
-  provider_web_mainstreet_community_pharmacy:
-    <<: *provider_web
-    container_name: sovereign-provider-web-mainstreet-community-pharmacy
-
-  provider_api_mainstreet_community_pharmacy:
-    <<: *provider_api
-    container_name: sovereign-provider-api-mainstreet-community-pharmacy
-    depends_on:
-      - provider_pod_mainstreet_community_pharmacy
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'mainstreet_community_pharmacy'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:mainstreet_community_pharmacy'
-      PROVIDER_LABEL: 'MainStreet Community Pharmacy (446110 - Pharmacies and Drug Stores)'
-      PROVIDER_TYPE: 'pharmacy-services'
-      PROVIDER_POD_URL: 'https://provider_pod_mainstreet_community_pharmacy:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_mainstreet_community_pharmacy:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-mainstreet-community-pharmacy
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_mainstreet_community_pharmacy:3000/'
-
-  provider_web_homestead_residential_leasing:
-    <<: *provider_web
-    container_name: sovereign-provider-web-homestead-residential-leasing
-
-  provider_api_homestead_residential_leasing:
-    <<: *provider_api
-    container_name: sovereign-provider-api-homestead-residential-leasing
-    depends_on:
-      - provider_pod_homestead_residential_leasing
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'homestead_residential_leasing'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:homestead_residential_leasing'
-      PROVIDER_LABEL: 'Homestead Residential Leasing (531110 - Lessors of Residential Buildings and Dwellings)'
-      PROVIDER_TYPE: 'residential-leasing-services'
-      PROVIDER_POD_URL: 'https://provider_pod_homestead_residential_leasing:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_homestead_residential_leasing:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-homestead-residential-leasing
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_homestead_residential_leasing:3000/'
-
-  provider_web_cornerstone_property_management:
-    <<: *provider_web
-    container_name: sovereign-provider-web-cornerstone-property-management
-
-  provider_api_cornerstone_property_management:
-    <<: *provider_api
-    container_name: sovereign-provider-api-cornerstone-property-management
-    depends_on:
-      - provider_pod_cornerstone_property_management
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'cornerstone_property_management'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:cornerstone_property_management'
-      PROVIDER_LABEL: 'Cornerstone Property Management (531311 - Residential Property Managers)'
-      PROVIDER_TYPE: 'property-management-services'
-      PROVIDER_POD_URL: 'https://provider_pod_cornerstone_property_management:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_cornerstone_property_management:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-cornerstone-property-management
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_cornerstone_property_management:3000/'
-
-  provider_web_summit_health_insurance_carrier:
-    <<: *provider_web
-    container_name: sovereign-provider-web-summit-health-insurance-carrier
-
-  provider_api_summit_health_insurance_carrier:
-    <<: *provider_api
-    container_name: sovereign-provider-api-summit-health-insurance-carrier
-    depends_on:
-      - provider_pod_summit_health_insurance_carrier
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'summit_health_insurance_carrier'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:summit_health_insurance_carrier'
-      PROVIDER_LABEL: 'Summit Health Insurance Carrier (524114 - Direct Health and Medical Insurance Carriers)'
-      PROVIDER_TYPE: 'health-insurance-carrier-services'
-      PROVIDER_POD_URL: 'https://provider_pod_summit_health_insurance_carrier:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_summit_health_insurance_carrier:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-summit-health-insurance-carrier
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_summit_health_insurance_carrier:3000/'
-
-  provider_web_atlas_claims_administration:
-    <<: *provider_web
-    container_name: sovereign-provider-web-atlas-claims-administration
-
-  provider_api_atlas_claims_administration:
-    <<: *provider_api
-    container_name: sovereign-provider-api-atlas-claims-administration
-    depends_on:
-      - provider_pod_atlas_claims_administration
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'atlas_claims_administration'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:atlas_claims_administration'
-      PROVIDER_LABEL: 'Atlas Claims Administration (524292 - Third Party Administration of Insurance and Pension Funds)'
-      PROVIDER_TYPE: 'claims-administration-services'
-      PROVIDER_POD_URL: 'https://provider_pod_atlas_claims_administration:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_atlas_claims_administration:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-atlas-claims-administration
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_atlas_claims_administration:3000/'
-
-  provider_web_sunrise_child_day_center:
-    <<: *provider_web
-    container_name: sovereign-provider-web-sunrise-child-day-center
-
-  provider_api_sunrise_child_day_center:
-    <<: *provider_api
-    container_name: sovereign-provider-api-sunrise-child-day-center
-    depends_on:
-      - provider_pod_sunrise_child_day_center
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'sunrise_child_day_center'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:sunrise_child_day_center'
-      PROVIDER_LABEL: 'Sunrise Child Day Center (624410 - Child Day Care Services)'
-      PROVIDER_TYPE: 'child-day-care-services'
-      PROVIDER_POD_URL: 'https://provider_pod_sunrise_child_day_center:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_sunrise_child_day_center:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-sunrise-child-day-center
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_sunrise_child_day_center:3000/'
-
-  provider_web_youthpath_child_services:
-    <<: *provider_web
-    container_name: sovereign-provider-web-youthpath-child-services
-
-  provider_api_youthpath_child_services:
-    <<: *provider_api
-    container_name: sovereign-provider-api-youthpath-child-services
-    depends_on:
-      - provider_pod_youthpath_child_services
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'youthpath_child_services'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:youthpath_child_services'
-      PROVIDER_LABEL: 'YouthPath Child and Youth Services (624110 - Child and Youth Services)'
-      PROVIDER_TYPE: 'child-youth-services'
-      PROVIDER_POD_URL: 'https://provider_pod_youthpath_child_services:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_youthpath_child_services:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-youthpath-child-services
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_youthpath_child_services:3000/'
-
-  provider_web_beacon_emergency_relief_services:
-    <<: *provider_web
-    container_name: sovereign-provider-web-beacon-emergency-relief-services
-
-  provider_api_beacon_emergency_relief_services:
-    <<: *provider_api
-    container_name: sovereign-provider-api-beacon-emergency-relief-services
-    depends_on:
-      - provider_pod_beacon_emergency_relief_services
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'beacon_emergency_relief_services'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:beacon_emergency_relief_services'
-      PROVIDER_LABEL: 'Beacon Emergency Relief Services (624230 - Emergency and Other Relief Services)'
-      PROVIDER_TYPE: 'emergency-relief-services'
-      PROVIDER_POD_URL: 'https://provider_pod_beacon_emergency_relief_services:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_beacon_emergency_relief_services:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-beacon-emergency-relief-services
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_beacon_emergency_relief_services:3000/'
-
-  provider_web_horizon_residential_recovery_center:
-    <<: *provider_web
-    container_name: sovereign-provider-web-horizon-residential-recovery-center
-
-  provider_api_horizon_residential_recovery_center:
-    <<: *provider_api
-    container_name: sovereign-provider-api-horizon-residential-recovery-center
-    depends_on:
-      - provider_pod_horizon_residential_recovery_center
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'horizon_residential_recovery_center'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:horizon_residential_recovery_center'
-      PROVIDER_LABEL: 'Horizon Residential Recovery Center (623220 - Residential Mental Health and Substance Abuse Facilities)'
-      PROVIDER_TYPE: 'residential-recovery-services'
-      PROVIDER_POD_URL: 'https://provider_pod_horizon_residential_recovery_center:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_horizon_residential_recovery_center:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-horizon-residential-recovery-center
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_horizon_residential_recovery_center:3000/'
-
-  provider_web_highland_workforce_training_institute:
-    <<: *provider_web
-    container_name: sovereign-provider-web-highland-workforce-training-institute
-
-  provider_api_highland_workforce_training_institute:
-    <<: *provider_api
-    container_name: sovereign-provider-api-highland-workforce-training-institute
-    depends_on:
-      - provider_pod_highland_workforce_training_institute
-    environment:
-      PORT: 8080
-      PROVIDER_ID: 'highland_workforce_training_institute'
-      PROVIDER_DID: 'did:web:demo.sovereign.ngo:provider:highland_workforce_training_institute'
-      PROVIDER_LABEL: 'Highland Workforce Training Institute (611430 - Professional and Management Development Training)'
-      PROVIDER_TYPE: 'workforce-training-services'
-      PROVIDER_POD_URL: 'https://provider_pod_highland_workforce_training_institute:3000/'
-      PROVIDER_API_SHARED_SECRET: 'sovereign-demo-provider-api-token'
-
-  provider_pod_highland_workforce_training_institute:
-    <<: *provider_pod
-    container_name: sovereign-provider-pod-highland-workforce-training-institute
-    environment:
-      CSS_BASE_URL: 'https://provider_pod_highland_workforce_training_institute:3000/'
+      - "8080:8080"
+
+  app:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.app
+    container_name: sovereign-demo-app
+    environment:
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+      ORGANIZATION_URLS_JSON: '{"nolichucky_family_clinic":"http://localhost:8787/","riverbend_dental_clinic":"http://localhost:8788/","riverstone_radiology_center":"http://localhost:8791/","summitview_emergency_department":"http://localhost:8792/","fairmannor_house":"http://localhost:8793/","safeharbor_shelter":"http://localhost:8794/","community_food_pantry":"http://localhost:8795/","bridgeway_family_services":"http://localhost:8796/","family_mediation_center":"http://localhost:8797/","salutation_army":"http://localhost:8798/","pioneer_legal_benefits_navigation":"http://localhost:8799/","tenant_rights_advocacy_network":"http://localhost:8800/","community_legal_family_support":"http://localhost:8801/","financial_wellness_center":"http://localhost:8802/","community_tax_services":"http://localhost:8803/","consumer_regulation_support":"http://localhost:8804/","commonwealth_credit_union":"http://localhost:8805/","neighborhood_insurance_brokers":"http://localhost:8806/","valley_notary_office":"http://localhost:8807/","community_legal_aid_collective":"http://localhost:8808/","ascent_employment_placement_agency":"http://localhost:8809/","rapid_response_temporary_help":"http://localhost:8810/","cedar_document_preparation_center":"http://localhost:8811/","brightpath_educational_support_center":"http://localhost:8812/","ridgeview_behavioral_health_center":"http://localhost:8813/","bluepeak_medical_laboratory":"http://localhost:8814/","caringhands_home_health":"http://localhost:8815/","tri_county_ambulance":"http://localhost:8816/","foothills_disability_support_services":"http://localhost:8817/","pathway_vocational_rehabilitation":"http://localhost:8818/","dignity_human_rights_organization":"http://localhost:8819/","appalachian_electric_distribution":"http://localhost:8820/","holston_wireless_carrier":"http://localhost:8821/","blue_river_natural_gas_utility":"http://localhost:8822/","volunteer_electrical_contractors":"http://localhost:8823/","foothills_plumbing_hvac_contractors":"http://localhost:8824/","clearwater_public_water_utility":"http://localhost:8825/","mainstreet_community_pharmacy":"http://localhost:8826/","homestead_residential_leasing":"http://localhost:8827/","cornerstone_property_management":"http://localhost:8828/","summit_health_insurance_carrier":"http://localhost:8829/","atlas_claims_administration":"http://localhost:8830/","sunrise_child_day_center":"http://localhost:8831/","youthpath_child_services":"http://localhost:8832/","beacon_emergency_relief_services":"http://localhost:8833/","horizon_residential_recovery_center":"http://localhost:8834/","highland_workforce_training_institute":"http://localhost:8835/","united_states_passport_office":"http://localhost:8789/","state_driver_licensing_agency":"http://localhost:8790/"}'
+    ports:
+      - "8081:8080"
+
+  solid:
+    image: solidproject/community-server:7.2.0@sha256:73465522db316ec2c7c0417bdf5b1b2eab432c70fab44fb25ba2f2098e21b9e5
+    container_name: sovereign-community-solid-server
+    environment:
+      CSS_BASE_URL: http://localhost:3000/
+      CSS_CONFIG: config/default.json
+    command: ["--seedConfig", "/config/demo-users.json"]
+    volumes:
+      - ./demo-users.json:/config/demo-users.json:ro
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+  organization-passport:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: united_states_passport_office
+    container_name: sovereign-demo-org-passport
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/united-states-passport-office/dist
+      ORGANIZATION_API_URL: http://localhost:8789/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+      PASSPORT_API_URL: http://localhost:8789/
+      DRIVER_LICENSE_API_URL: http://localhost:8790/
+      NOLICHUCKY_API_URL: http://localhost:8787/
+      RIVERBEND_API_URL: http://localhost:8788/
+      TRUST_ENDPOINTS_JSON: '{"state_driver_licensing_agency":"http://organization-driver-license:8787/"}'
+    ports:
+      - "8789:8787"
+
+  organization-driver-license:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: state_driver_licensing_agency
+    container_name: sovereign-demo-org-driver-license
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/state-driver-licensing-agency/dist
+      ORGANIZATION_API_URL: http://localhost:8790/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+      PASSPORT_API_URL: http://localhost:8789/
+      DRIVER_LICENSE_API_URL: http://localhost:8790/
+      NOLICHUCKY_API_URL: http://localhost:8787/
+      RIVERBEND_API_URL: http://localhost:8788/
+      TRUST_ENDPOINTS_JSON: '{"united_states_passport_office":"http://organization-passport:8787/"}'
+    ports:
+      - "8790:8787"
+
+  organization-nolichucky:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: nolichucky_family_clinic
+    container_name: sovereign-demo-org-nolichucky
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/nolichucky-family-clinic/dist
+      ORGANIZATION_API_URL: http://localhost:8787/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+      PASSPORT_API_URL: http://localhost:8789/
+      DRIVER_LICENSE_API_URL: http://localhost:8790/
+      NOLICHUCKY_API_URL: http://localhost:8787/
+      RIVERBEND_API_URL: http://localhost:8788/
+      TRUST_ENDPOINTS_JSON: '{"riverbend_dental_clinic":"http://organization-riverbend:8787/"}'
+    ports:
+      - "8787:8787"
+
+  organization-riverbend:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: riverbend_dental_clinic
+    container_name: sovereign-demo-org-riverbend
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/riverbend-dental-clinic/dist
+      ORGANIZATION_API_URL: http://localhost:8788/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+      PASSPORT_API_URL: http://localhost:8789/
+      DRIVER_LICENSE_API_URL: http://localhost:8790/
+      NOLICHUCKY_API_URL: http://localhost:8787/
+      RIVERBEND_API_URL: http://localhost:8788/
+      TRUST_ENDPOINTS_JSON: '{"nolichucky_family_clinic":"http://organization-nolichucky:8787/"}'
+    ports:
+      - "8788:8787"
+
+  organization-riverstone-radiology-center:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: riverstone_radiology_center
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/riverstone-radiology-center/dist
+      ORGANIZATION_API_URL: http://localhost:8791/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8791:8787"
+
+  organization-summitview-emergency-department:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: summitview_emergency_department
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/summitview-emergency-department/dist
+      ORGANIZATION_API_URL: http://localhost:8792/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8792:8787"
+
+  organization-fairmannor-house:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: fairmannor_house
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/fairmannor-house/dist
+      ORGANIZATION_API_URL: http://localhost:8793/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8793:8787"
+
+  organization-safeharbor-shelter:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: safeharbor_shelter
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/safeharbor-shelter/dist
+      ORGANIZATION_API_URL: http://localhost:8794/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8794:8787"
+
+  organization-community-food-pantry:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: community_food_pantry
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/community-food-pantry/dist
+      ORGANIZATION_API_URL: http://localhost:8795/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8795:8787"
+
+  organization-bridgeway-family-services:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: bridgeway_family_services
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/bridgeway-family-services/dist
+      ORGANIZATION_API_URL: http://localhost:8796/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8796:8787"
+
+  organization-family-mediation-center:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: family_mediation_center
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/family-mediation-center/dist
+      ORGANIZATION_API_URL: http://localhost:8797/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8797:8787"
+
+  organization-salutation-army:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: salutation_army
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/salutation-army/dist
+      ORGANIZATION_API_URL: http://localhost:8798/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8798:8787"
+
+  organization-pioneer-legal-benefits-navigation:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: pioneer_legal_benefits_navigation
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/pioneer-legal-benefits-navigation/dist
+      ORGANIZATION_API_URL: http://localhost:8799/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8799:8787"
+
+  organization-tenant-rights-advocacy-network:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: tenant_rights_advocacy_network
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/tenant-rights-advocacy-network/dist
+      ORGANIZATION_API_URL: http://localhost:8800/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8800:8787"
+
+  organization-community-legal-family-support:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: community_legal_family_support
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/community-legal-family-support/dist
+      ORGANIZATION_API_URL: http://localhost:8801/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8801:8787"
+
+  organization-financial-wellness-center:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: financial_wellness_center
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/financial-wellness-center/dist
+      ORGANIZATION_API_URL: http://localhost:8802/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8802:8787"
+
+  organization-community-tax-services:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: community_tax_services
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/community-tax-services/dist
+      ORGANIZATION_API_URL: http://localhost:8803/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8803:8787"
+
+  organization-consumer-regulation-support:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: consumer_regulation_support
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/consumer-regulation-support/dist
+      ORGANIZATION_API_URL: http://localhost:8804/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8804:8787"
+
+  organization-commonwealth-credit-union:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: commonwealth_credit_union
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/commonwealth-credit-union/dist
+      ORGANIZATION_API_URL: http://localhost:8805/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8805:8787"
+
+  organization-neighborhood-insurance-brokers:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: neighborhood_insurance_brokers
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/neighborhood-insurance-brokers/dist
+      ORGANIZATION_API_URL: http://localhost:8806/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8806:8787"
+
+  organization-valley-notary-office:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: valley_notary_office
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/valley-notary-office/dist
+      ORGANIZATION_API_URL: http://localhost:8807/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8807:8787"
+
+  organization-community-legal-aid-collective:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: community_legal_aid_collective
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/community-legal-aid-collective/dist
+      ORGANIZATION_API_URL: http://localhost:8808/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8808:8787"
+
+  organization-ascent-employment-placement-agency:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: ascent_employment_placement_agency
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/ascent-employment-placement-agency/dist
+      ORGANIZATION_API_URL: http://localhost:8809/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8809:8787"
+
+  organization-rapid-response-temporary-help:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: rapid_response_temporary_help
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/rapid-response-temporary-help/dist
+      ORGANIZATION_API_URL: http://localhost:8810/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8810:8787"
+
+  organization-cedar-document-preparation-center:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: cedar_document_preparation_center
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/cedar-document-preparation-center/dist
+      ORGANIZATION_API_URL: http://localhost:8811/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8811:8787"
+
+  organization-brightpath-educational-support-center:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: brightpath_educational_support_center
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/brightpath-educational-support-center/dist
+      ORGANIZATION_API_URL: http://localhost:8812/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8812:8787"
+
+  organization-ridgeview-behavioral-health-center:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: ridgeview_behavioral_health_center
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/ridgeview-behavioral-health-center/dist
+      ORGANIZATION_API_URL: http://localhost:8813/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8813:8787"
+
+  organization-bluepeak-medical-laboratory:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: bluepeak_medical_laboratory
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/bluepeak-medical-laboratory/dist
+      ORGANIZATION_API_URL: http://localhost:8814/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8814:8787"
+
+  organization-caringhands-home-health:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: caringhands_home_health
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/caringhands-home-health/dist
+      ORGANIZATION_API_URL: http://localhost:8815/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8815:8787"
+
+  organization-tri-county-ambulance:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: tri_county_ambulance
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/tri-county-ambulance/dist
+      ORGANIZATION_API_URL: http://localhost:8816/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8816:8787"
+
+  organization-foothills-disability-support-services:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: foothills_disability_support_services
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/foothills-disability-support-services/dist
+      ORGANIZATION_API_URL: http://localhost:8817/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8817:8787"
+
+  organization-pathway-vocational-rehabilitation:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: pathway_vocational_rehabilitation
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/pathway-vocational-rehabilitation/dist
+      ORGANIZATION_API_URL: http://localhost:8818/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8818:8787"
+
+  organization-dignity-human-rights-organization:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: dignity_human_rights_organization
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/dignity-human-rights-organization/dist
+      ORGANIZATION_API_URL: http://localhost:8819/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8819:8787"
+
+  organization-appalachian-electric-distribution:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: appalachian_electric_distribution
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/appalachian-electric-distribution/dist
+      ORGANIZATION_API_URL: http://localhost:8820/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8820:8787"
+
+  organization-holston-wireless-carrier:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: holston_wireless_carrier
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/holston-wireless-carrier/dist
+      ORGANIZATION_API_URL: http://localhost:8821/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8821:8787"
+
+  organization-blue-river-natural-gas-utility:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: blue_river_natural_gas_utility
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/blue-river-natural-gas-utility/dist
+      ORGANIZATION_API_URL: http://localhost:8822/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8822:8787"
+
+  organization-volunteer-electrical-contractors:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: volunteer_electrical_contractors
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/volunteer-electrical-contractors/dist
+      ORGANIZATION_API_URL: http://localhost:8823/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8823:8787"
+
+  organization-foothills-plumbing-hvac-contractors:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: foothills_plumbing_hvac_contractors
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/foothills-plumbing-hvac-contractors/dist
+      ORGANIZATION_API_URL: http://localhost:8824/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8824:8787"
+
+  organization-clearwater-public-water-utility:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: clearwater_public_water_utility
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/clearwater-public-water-utility/dist
+      ORGANIZATION_API_URL: http://localhost:8825/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8825:8787"
+
+  organization-mainstreet-community-pharmacy:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: mainstreet_community_pharmacy
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/mainstreet-community-pharmacy/dist
+      ORGANIZATION_API_URL: http://localhost:8826/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8826:8787"
+
+  organization-homestead-residential-leasing:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: homestead_residential_leasing
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/homestead-residential-leasing/dist
+      ORGANIZATION_API_URL: http://localhost:8827/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8827:8787"
+
+  organization-cornerstone-property-management:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: cornerstone_property_management
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/cornerstone-property-management/dist
+      ORGANIZATION_API_URL: http://localhost:8828/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8828:8787"
+
+  organization-summit-health-insurance-carrier:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: summit_health_insurance_carrier
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/summit-health-insurance-carrier/dist
+      ORGANIZATION_API_URL: http://localhost:8829/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8829:8787"
+
+  organization-atlas-claims-administration:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: atlas_claims_administration
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/atlas-claims-administration/dist
+      ORGANIZATION_API_URL: http://localhost:8830/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8830:8787"
+
+  organization-sunrise-child-day-center:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: sunrise_child_day_center
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/sunrise-child-day-center/dist
+      ORGANIZATION_API_URL: http://localhost:8831/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8831:8787"
+
+  organization-youthpath-child-services:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: youthpath_child_services
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/youthpath-child-services/dist
+      ORGANIZATION_API_URL: http://localhost:8832/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8832:8787"
+
+  organization-beacon-emergency-relief-services:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: beacon_emergency_relief_services
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/beacon-emergency-relief-services/dist
+      ORGANIZATION_API_URL: http://localhost:8833/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8833:8787"
+
+  organization-horizon-residential-recovery-center:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: horizon_residential_recovery_center
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/horizon-residential-recovery-center/dist
+      ORGANIZATION_API_URL: http://localhost:8834/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8834:8787"
+
+  organization-highland-workforce-training-institute:
+    build:
+      context: ..
+      dockerfile: containerization/Dockerfile.organization
+      args:
+        ORGANIZATION_ID: highland_workforce_training_institute
+    environment:
+      ORGANIZATION_ASSETS_DIR: /app/organizations/highland-workforce-training-institute/dist
+      ORGANIZATION_API_URL: http://localhost:8835/
+      DEPLOYMENT_ENVIRONMENT: local
+      WEBSITE_URL: http://localhost:8080/
+      APP_URL: http://localhost:8081/
+      PODS_URL: http://localhost:3000/
+    ports:
+      - "8835:8787"

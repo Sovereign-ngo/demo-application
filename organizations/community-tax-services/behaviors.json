@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "community_tax_services": {
+      "selfActions": [
+        {
+          "id": "request_tax_support",
+          "label": "Request tax preparation support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "review_tax_documents",
+          "label": "Review tax documents"
+        },
+        {
+          "id": "prepare_tax_return",
+          "label": "Prepare tax return"
+        },
+        {
+          "id": "record_filing_confirmation",
+          "label": "Record filing confirmation"
+        }
+      ]
+    }
+  }
+}

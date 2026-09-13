@@ -1,0 +1,199 @@
+import api0 from './united-states-passport-office/api.json' with { type: 'json' };
+import organization0 from './united-states-passport-office/organization.json' with { type: 'json' };
+import trust0 from './united-states-passport-office/trust.json' with { type: 'json' };
+import api1 from './state-driver-licensing-agency/api.json' with { type: 'json' };
+import organization1 from './state-driver-licensing-agency/organization.json' with { type: 'json' };
+import trust1 from './state-driver-licensing-agency/trust.json' with { type: 'json' };
+import api2 from './nolichucky-family-clinic/api.json' with { type: 'json' };
+import organization2 from './nolichucky-family-clinic/organization.json' with { type: 'json' };
+import trust2 from './nolichucky-family-clinic/trust.json' with { type: 'json' };
+import api3 from './riverbend-dental-clinic/api.json' with { type: 'json' };
+import organization3 from './riverbend-dental-clinic/organization.json' with { type: 'json' };
+import trust3 from './riverbend-dental-clinic/trust.json' with { type: 'json' };
+import api4 from './riverstone-radiology-center/api.json' with { type: 'json' };
+import organization4 from './riverstone-radiology-center/organization.json' with { type: 'json' };
+import trust4 from './riverstone-radiology-center/trust.json' with { type: 'json' };
+import api5 from './summitview-emergency-department/api.json' with { type: 'json' };
+import organization5 from './summitview-emergency-department/organization.json' with { type: 'json' };
+import trust5 from './summitview-emergency-department/trust.json' with { type: 'json' };
+import api6 from './fairmannor-house/api.json' with { type: 'json' };
+import organization6 from './fairmannor-house/organization.json' with { type: 'json' };
+import trust6 from './fairmannor-house/trust.json' with { type: 'json' };
+import api7 from './safeharbor-shelter/api.json' with { type: 'json' };
+import organization7 from './safeharbor-shelter/organization.json' with { type: 'json' };
+import trust7 from './safeharbor-shelter/trust.json' with { type: 'json' };
+import api8 from './community-food-pantry/api.json' with { type: 'json' };
+import organization8 from './community-food-pantry/organization.json' with { type: 'json' };
+import trust8 from './community-food-pantry/trust.json' with { type: 'json' };
+import api9 from './bridgeway-family-services/api.json' with { type: 'json' };
+import organization9 from './bridgeway-family-services/organization.json' with { type: 'json' };
+import trust9 from './bridgeway-family-services/trust.json' with { type: 'json' };
+import api10 from './family-mediation-center/api.json' with { type: 'json' };
+import organization10 from './family-mediation-center/organization.json' with { type: 'json' };
+import trust10 from './family-mediation-center/trust.json' with { type: 'json' };
+import api11 from './salutation-army/api.json' with { type: 'json' };
+import organization11 from './salutation-army/organization.json' with { type: 'json' };
+import trust11 from './salutation-army/trust.json' with { type: 'json' };
+import api12 from './pioneer-legal-benefits-navigation/api.json' with { type: 'json' };
+import organization12 from './pioneer-legal-benefits-navigation/organization.json' with { type: 'json' };
+import trust12 from './pioneer-legal-benefits-navigation/trust.json' with { type: 'json' };
+import api13 from './tenant-rights-advocacy-network/api.json' with { type: 'json' };
+import organization13 from './tenant-rights-advocacy-network/organization.json' with { type: 'json' };
+import trust13 from './tenant-rights-advocacy-network/trust.json' with { type: 'json' };
+import api14 from './community-legal-family-support/api.json' with { type: 'json' };
+import organization14 from './community-legal-family-support/organization.json' with { type: 'json' };
+import trust14 from './community-legal-family-support/trust.json' with { type: 'json' };
+import api15 from './financial-wellness-center/api.json' with { type: 'json' };
+import organization15 from './financial-wellness-center/organization.json' with { type: 'json' };
+import trust15 from './financial-wellness-center/trust.json' with { type: 'json' };
+import api16 from './community-tax-services/api.json' with { type: 'json' };
+import organization16 from './community-tax-services/organization.json' with { type: 'json' };
+import trust16 from './community-tax-services/trust.json' with { type: 'json' };
+import api17 from './consumer-regulation-support/api.json' with { type: 'json' };
+import organization17 from './consumer-regulation-support/organization.json' with { type: 'json' };
+import trust17 from './consumer-regulation-support/trust.json' with { type: 'json' };
+import api18 from './commonwealth-credit-union/api.json' with { type: 'json' };
+import organization18 from './commonwealth-credit-union/organization.json' with { type: 'json' };
+import trust18 from './commonwealth-credit-union/trust.json' with { type: 'json' };
+import api19 from './neighborhood-insurance-brokers/api.json' with { type: 'json' };
+import organization19 from './neighborhood-insurance-brokers/organization.json' with { type: 'json' };
+import trust19 from './neighborhood-insurance-brokers/trust.json' with { type: 'json' };
+import api20 from './valley-notary-office/api.json' with { type: 'json' };
+import organization20 from './valley-notary-office/organization.json' with { type: 'json' };
+import trust20 from './valley-notary-office/trust.json' with { type: 'json' };
+import api21 from './community-legal-aid-collective/api.json' with { type: 'json' };
+import organization21 from './community-legal-aid-collective/organization.json' with { type: 'json' };
+import trust21 from './community-legal-aid-collective/trust.json' with { type: 'json' };
+import api22 from './ascent-employment-placement-agency/api.json' with { type: 'json' };
+import organization22 from './ascent-employment-placement-agency/organization.json' with { type: 'json' };
+import trust22 from './ascent-employment-placement-agency/trust.json' with { type: 'json' };
+import api23 from './rapid-response-temporary-help/api.json' with { type: 'json' };
+import organization23 from './rapid-response-temporary-help/organization.json' with { type: 'json' };
+import trust23 from './rapid-response-temporary-help/trust.json' with { type: 'json' };
+import api24 from './cedar-document-preparation-center/api.json' with { type: 'json' };
+import organization24 from './cedar-document-preparation-center/organization.json' with { type: 'json' };
+import trust24 from './cedar-document-preparation-center/trust.json' with { type: 'json' };
+import api25 from './brightpath-educational-support-center/api.json' with { type: 'json' };
+import organization25 from './brightpath-educational-support-center/organization.json' with { type: 'json' };
+import trust25 from './brightpath-educational-support-center/trust.json' with { type: 'json' };
+import api26 from './ridgeview-behavioral-health-center/api.json' with { type: 'json' };
+import organization26 from './ridgeview-behavioral-health-center/organization.json' with { type: 'json' };
+import trust26 from './ridgeview-behavioral-health-center/trust.json' with { type: 'json' };
+import api27 from './bluepeak-medical-laboratory/api.json' with { type: 'json' };
+import organization27 from './bluepeak-medical-laboratory/organization.json' with { type: 'json' };
+import trust27 from './bluepeak-medical-laboratory/trust.json' with { type: 'json' };
+import api28 from './caringhands-home-health/api.json' with { type: 'json' };
+import organization28 from './caringhands-home-health/organization.json' with { type: 'json' };
+import trust28 from './caringhands-home-health/trust.json' with { type: 'json' };
+import api29 from './tri-county-ambulance/api.json' with { type: 'json' };
+import organization29 from './tri-county-ambulance/organization.json' with { type: 'json' };
+import trust29 from './tri-county-ambulance/trust.json' with { type: 'json' };
+import api30 from './foothills-disability-support-services/api.json' with { type: 'json' };
+import organization30 from './foothills-disability-support-services/organization.json' with { type: 'json' };
+import trust30 from './foothills-disability-support-services/trust.json' with { type: 'json' };
+import api31 from './pathway-vocational-rehabilitation/api.json' with { type: 'json' };
+import organization31 from './pathway-vocational-rehabilitation/organization.json' with { type: 'json' };
+import trust31 from './pathway-vocational-rehabilitation/trust.json' with { type: 'json' };
+import api32 from './dignity-human-rights-organization/api.json' with { type: 'json' };
+import organization32 from './dignity-human-rights-organization/organization.json' with { type: 'json' };
+import trust32 from './dignity-human-rights-organization/trust.json' with { type: 'json' };
+import api33 from './appalachian-electric-distribution/api.json' with { type: 'json' };
+import organization33 from './appalachian-electric-distribution/organization.json' with { type: 'json' };
+import trust33 from './appalachian-electric-distribution/trust.json' with { type: 'json' };
+import api34 from './holston-wireless-carrier/api.json' with { type: 'json' };
+import organization34 from './holston-wireless-carrier/organization.json' with { type: 'json' };
+import trust34 from './holston-wireless-carrier/trust.json' with { type: 'json' };
+import api35 from './blue-river-natural-gas-utility/api.json' with { type: 'json' };
+import organization35 from './blue-river-natural-gas-utility/organization.json' with { type: 'json' };
+import trust35 from './blue-river-natural-gas-utility/trust.json' with { type: 'json' };
+import api36 from './volunteer-electrical-contractors/api.json' with { type: 'json' };
+import organization36 from './volunteer-electrical-contractors/organization.json' with { type: 'json' };
+import trust36 from './volunteer-electrical-contractors/trust.json' with { type: 'json' };
+import api37 from './foothills-plumbing-hvac-contractors/api.json' with { type: 'json' };
+import organization37 from './foothills-plumbing-hvac-contractors/organization.json' with { type: 'json' };
+import trust37 from './foothills-plumbing-hvac-contractors/trust.json' with { type: 'json' };
+import api38 from './clearwater-public-water-utility/api.json' with { type: 'json' };
+import organization38 from './clearwater-public-water-utility/organization.json' with { type: 'json' };
+import trust38 from './clearwater-public-water-utility/trust.json' with { type: 'json' };
+import api39 from './mainstreet-community-pharmacy/api.json' with { type: 'json' };
+import organization39 from './mainstreet-community-pharmacy/organization.json' with { type: 'json' };
+import trust39 from './mainstreet-community-pharmacy/trust.json' with { type: 'json' };
+import api40 from './homestead-residential-leasing/api.json' with { type: 'json' };
+import organization40 from './homestead-residential-leasing/organization.json' with { type: 'json' };
+import trust40 from './homestead-residential-leasing/trust.json' with { type: 'json' };
+import api41 from './cornerstone-property-management/api.json' with { type: 'json' };
+import organization41 from './cornerstone-property-management/organization.json' with { type: 'json' };
+import trust41 from './cornerstone-property-management/trust.json' with { type: 'json' };
+import api42 from './summit-health-insurance-carrier/api.json' with { type: 'json' };
+import organization42 from './summit-health-insurance-carrier/organization.json' with { type: 'json' };
+import trust42 from './summit-health-insurance-carrier/trust.json' with { type: 'json' };
+import api43 from './atlas-claims-administration/api.json' with { type: 'json' };
+import organization43 from './atlas-claims-administration/organization.json' with { type: 'json' };
+import trust43 from './atlas-claims-administration/trust.json' with { type: 'json' };
+import api44 from './sunrise-child-day-center/api.json' with { type: 'json' };
+import organization44 from './sunrise-child-day-center/organization.json' with { type: 'json' };
+import trust44 from './sunrise-child-day-center/trust.json' with { type: 'json' };
+import api45 from './youthpath-child-services/api.json' with { type: 'json' };
+import organization45 from './youthpath-child-services/organization.json' with { type: 'json' };
+import trust45 from './youthpath-child-services/trust.json' with { type: 'json' };
+import api46 from './beacon-emergency-relief-services/api.json' with { type: 'json' };
+import organization46 from './beacon-emergency-relief-services/organization.json' with { type: 'json' };
+import trust46 from './beacon-emergency-relief-services/trust.json' with { type: 'json' };
+import api47 from './horizon-residential-recovery-center/api.json' with { type: 'json' };
+import organization47 from './horizon-residential-recovery-center/organization.json' with { type: 'json' };
+import trust47 from './horizon-residential-recovery-center/trust.json' with { type: 'json' };
+import api48 from './highland-workforce-training-institute/api.json' with { type: 'json' };
+import organization48 from './highland-workforce-training-institute/organization.json' with { type: 'json' };
+import trust48 from './highland-workforce-training-institute/trust.json' with { type: 'json' };
+
+export default Object.freeze({
+  united_states_passport_office: { organization: organization0, api: api0, trust: trust0 },
+  state_driver_licensing_agency: { organization: organization1, api: api1, trust: trust1 },
+  nolichucky_family_clinic: { organization: organization2, api: api2, trust: trust2 },
+  riverbend_dental_clinic: { organization: organization3, api: api3, trust: trust3 },
+  riverstone_radiology_center: { organization: organization4, api: api4, trust: trust4 },
+  summitview_emergency_department: { organization: organization5, api: api5, trust: trust5 },
+  fairmannor_house: { organization: organization6, api: api6, trust: trust6 },
+  safeharbor_shelter: { organization: organization7, api: api7, trust: trust7 },
+  community_food_pantry: { organization: organization8, api: api8, trust: trust8 },
+  bridgeway_family_services: { organization: organization9, api: api9, trust: trust9 },
+  family_mediation_center: { organization: organization10, api: api10, trust: trust10 },
+  salutation_army: { organization: organization11, api: api11, trust: trust11 },
+  pioneer_legal_benefits_navigation: { organization: organization12, api: api12, trust: trust12 },
+  tenant_rights_advocacy_network: { organization: organization13, api: api13, trust: trust13 },
+  community_legal_family_support: { organization: organization14, api: api14, trust: trust14 },
+  financial_wellness_center: { organization: organization15, api: api15, trust: trust15 },
+  community_tax_services: { organization: organization16, api: api16, trust: trust16 },
+  consumer_regulation_support: { organization: organization17, api: api17, trust: trust17 },
+  commonwealth_credit_union: { organization: organization18, api: api18, trust: trust18 },
+  neighborhood_insurance_brokers: { organization: organization19, api: api19, trust: trust19 },
+  valley_notary_office: { organization: organization20, api: api20, trust: trust20 },
+  community_legal_aid_collective: { organization: organization21, api: api21, trust: trust21 },
+  ascent_employment_placement_agency: { organization: organization22, api: api22, trust: trust22 },
+  rapid_response_temporary_help: { organization: organization23, api: api23, trust: trust23 },
+  cedar_document_preparation_center: { organization: organization24, api: api24, trust: trust24 },
+  brightpath_educational_support_center: { organization: organization25, api: api25, trust: trust25 },
+  ridgeview_behavioral_health_center: { organization: organization26, api: api26, trust: trust26 },
+  bluepeak_medical_laboratory: { organization: organization27, api: api27, trust: trust27 },
+  caringhands_home_health: { organization: organization28, api: api28, trust: trust28 },
+  tri_county_ambulance: { organization: organization29, api: api29, trust: trust29 },
+  foothills_disability_support_services: { organization: organization30, api: api30, trust: trust30 },
+  pathway_vocational_rehabilitation: { organization: organization31, api: api31, trust: trust31 },
+  dignity_human_rights_organization: { organization: organization32, api: api32, trust: trust32 },
+  appalachian_electric_distribution: { organization: organization33, api: api33, trust: trust33 },
+  holston_wireless_carrier: { organization: organization34, api: api34, trust: trust34 },
+  blue_river_natural_gas_utility: { organization: organization35, api: api35, trust: trust35 },
+  volunteer_electrical_contractors: { organization: organization36, api: api36, trust: trust36 },
+  foothills_plumbing_hvac_contractors: { organization: organization37, api: api37, trust: trust37 },
+  clearwater_public_water_utility: { organization: organization38, api: api38, trust: trust38 },
+  mainstreet_community_pharmacy: { organization: organization39, api: api39, trust: trust39 },
+  homestead_residential_leasing: { organization: organization40, api: api40, trust: trust40 },
+  cornerstone_property_management: { organization: organization41, api: api41, trust: trust41 },
+  summit_health_insurance_carrier: { organization: organization42, api: api42, trust: trust42 },
+  atlas_claims_administration: { organization: organization43, api: api43, trust: trust43 },
+  sunrise_child_day_center: { organization: organization44, api: api44, trust: trust44 },
+  youthpath_child_services: { organization: organization45, api: api45, trust: trust45 },
+  beacon_emergency_relief_services: { organization: organization46, api: api46, trust: trust46 },
+  horizon_residential_recovery_center: { organization: organization47, api: api47, trust: trust47 },
+  highland_workforce_training_institute: { organization: organization48, api: api48, trust: trust48 }
+});

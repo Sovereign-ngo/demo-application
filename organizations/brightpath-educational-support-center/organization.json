@@ -1,0 +1,17 @@
+{
+  "id": "brightpath_educational_support_center",
+  "name": "BrightPath Educational Support Center",
+  "type": "educational-support-services",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "education-support",
+    "document-assistance"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

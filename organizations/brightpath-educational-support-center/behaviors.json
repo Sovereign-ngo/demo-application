@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "brightpath_educational_support_center": {
+      "selfActions": [
+        {
+          "id": "request_education_support",
+          "label": "Request educational support services"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "assess_learning_needs",
+          "label": "Assess learning needs"
+        },
+        {
+          "id": "create_education_support_plan",
+          "label": "Create education support plan"
+        },
+        {
+          "id": "record_learning_progress",
+          "label": "Record learning progress"
+        }
+      ]
+    }
+  }
+}

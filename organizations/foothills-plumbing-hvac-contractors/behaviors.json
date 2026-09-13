@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "foothills_plumbing_hvac_contractors": {
+      "selfActions": [
+        {
+          "id": "request_plumbing_hvac_service_support",
+          "label": "Request plumbing, heating, and air support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "inspect_plumbing_hvac_need",
+          "label": "Inspect plumbing or HVAC need"
+        },
+        {
+          "id": "schedule_home_repair",
+          "label": "Schedule home repair"
+        },
+        {
+          "id": "record_repair_completion",
+          "label": "Record repair completion"
+        }
+      ]
+    }
+  }
+}

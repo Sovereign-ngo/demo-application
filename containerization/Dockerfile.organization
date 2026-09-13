@@ -1,0 +1,85 @@
+FROM node:22-alpine AS portal-build
+
+WORKDIR /build/webapp
+COPY webapp/package.json webapp/package-lock.json ./
+RUN npm ci
+COPY webapp ./
+COPY organizations /build/organizations
+COPY containerization/demo-users.json /build/containerization/demo-users.json
+RUN npm run build && node /build/organizations/build.js
+
+FROM node:22-alpine
+
+ARG ORGANIZATION_ID
+ENV ORGANIZATION_ID=${ORGANIZATION_ID}
+ENV WORKER_ENTRY=/app/cloudflare/organization-worker.js
+ENV PORT=8787
+
+WORKDIR /app
+COPY cloudflare/organization-worker.js /app/cloudflare/organization-worker.js
+COPY --from=portal-build /build/organizations /app/organizations
+
+RUN <<'LOCAL_WORKER_SERVER' sh
+cat > /app/local-worker-server.mjs <<'EOF'
+import http from 'node:http';
+import { readFile, stat } from 'node:fs/promises';
+import { extname, resolve, sep } from 'node:path';
+
+const workerModule = await import(process.env.WORKER_ENTRY);
+const worker = workerModule.default;
+if (!worker || typeof worker.fetch !== 'function') {
+  throw new Error('Worker entrypoint must default-export an object with a fetch function.');
+}
+
+const port = Number(process.env.PORT || 8787);
+const assetRoot = resolve(process.env.ORGANIZATION_ASSETS_DIR);
+const contentTypes = {
+  '.css': 'text/css; charset=utf-8',
+  '.html': 'text/html; charset=utf-8',
+  '.js': 'application/javascript; charset=utf-8',
+  '.json': 'application/json; charset=utf-8'
+};
+const assets = {
+  async fetch(request) {
+    let pathname = decodeURIComponent(new URL(request.url).pathname);
+    if (pathname.endsWith('/')) pathname += 'index.html';
+    const filePath = resolve(assetRoot, `.${pathname}`);
+    if (!filePath.startsWith(`${assetRoot}${sep}`)) return new Response('Not found', { status: 404 });
+    try {
+      if (!(await stat(filePath)).isFile()) return new Response('Not found', { status: 404 });
+      return new Response(await readFile(filePath), {
+        headers: { 'content-type': contentTypes[extname(filePath)] || 'application/octet-stream' }
+      });
+    } catch {
+      return new Response('Not found', { status: 404 });
+    }
+  }
+};
+const workerEnv = { ...process.env, ASSETS: assets };
+
+const server = http.createServer(async (request, response) => {
+  try {
+    const chunks = [];
+    for await (const chunk of request) chunks.push(chunk);
+    const body = chunks.length ? Buffer.concat(chunks) : undefined;
+    const origin = `http://${request.headers.host || `localhost:${port}`}`;
+    const workerResponse = await worker.fetch(new Request(new URL(request.url || '/', origin), {
+      method: request.method,
+      headers: request.headers,
+      body,
+      duplex: body ? 'half' : undefined
+    }), workerEnv, {});
+    response.writeHead(workerResponse.status, Object.fromEntries(workerResponse.headers));
+    response.end(Buffer.from(await workerResponse.arrayBuffer()));
+  } catch (error) {
+    response.writeHead(500, { 'content-type': 'application/json; charset=utf-8' });
+    response.end(JSON.stringify({ ok: false, error: error instanceof Error ? error.message : 'Unknown error' }));
+  }
+});
+
+server.listen(port, '0.0.0.0', () => console.log(`[local-worker] organization listening on ${port}`));
+EOF
+LOCAL_WORKER_SERVER
+
+EXPOSE 8787
+CMD ["node", "/app/local-worker-server.mjs"]

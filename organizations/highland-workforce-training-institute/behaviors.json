@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "highland_workforce_training_institute": {
+      "selfActions": [
+        {
+          "id": "request_workforce_training_support",
+          "label": "Request workforce training support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "assess_training_readiness",
+          "label": "Assess training readiness"
+        },
+        {
+          "id": "enroll_training_program",
+          "label": "Enroll in training program"
+        },
+        {
+          "id": "record_training_completion",
+          "label": "Record training completion"
+        }
+      ]
+    }
+  }
+}

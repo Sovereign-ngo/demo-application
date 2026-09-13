@@ -1,0 +1,42 @@
+[
+  {
+    "email": "alex@demo.sovereign.ngo", "password": "SovereignDemo!",
+    "profile": { "displayName": "Alex Sovereign", "description": "Routine health care and pharmacy coordination." },
+    "pods": [{ "name": "alex", "records": [
+      { "providerId": "nolichucky_family_clinic", "category": "health", "summary": "Annual wellness visit summary." },
+      { "providerId": "mainstreet_community_pharmacy", "category": "pharmacy", "summary": "Active pharmacy profile." }
+    ], "credentials": [{ "type": "DemoPersonCredential", "issuerProviderId": "sovereign_ngo", "issuerProviderDid": "did:web:demo.sovereign.ngo", "claims": { "synthetic": true } }] }]
+  },
+  {
+    "email": "betty@demo.sovereign.ngo", "password": "SovereignDemo!",
+    "profile": { "displayName": "Betty Medina", "description": "Emergency shelter access and longer-term housing navigation." },
+    "pods": [{ "name": "betty", "records": [
+      { "providerId": "safeharbor_shelter", "category": "housing", "summary": "Emergency shelter intake completed." },
+      { "providerId": "fairmannor_house", "category": "housing", "summary": "Housing navigation assessment started." }
+    ], "credentials": [{ "type": "DemoPersonCredential", "issuerProviderId": "sovereign_ngo", "issuerProviderDid": "did:web:demo.sovereign.ngo", "claims": { "synthetic": true } }] }]
+  },
+  {
+    "email": "charlie@demo.sovereign.ngo", "password": "SovereignDemo!",
+    "profile": { "displayName": "Charlie Krier", "description": "Workforce training and employment placement." },
+    "pods": [{ "name": "charlie", "records": [
+      { "providerId": "highland_workforce_training_institute", "category": "employment", "summary": "Workforce training enrollment active." },
+      { "providerId": "ascent_employment_placement_agency", "category": "employment", "summary": "Employment placement intake completed." }
+    ], "credentials": [{ "type": "DemoPersonCredential", "issuerProviderId": "sovereign_ngo", "issuerProviderDid": "did:web:demo.sovereign.ngo", "claims": { "synthetic": true } }] }]
+  },
+  {
+    "email": "debra@demo.sovereign.ngo", "password": "SovereignDemo!",
+    "profile": { "displayName": "Debra Harbor", "description": "Child care enrollment and family support services." },
+    "pods": [{ "name": "debra", "records": [
+      { "providerId": "sunrise_child_day_center", "category": "family", "summary": "Child care enrollment record." },
+      { "providerId": "bridgeway_family_services", "category": "family", "summary": "Family support plan in progress." }
+    ], "credentials": [{ "type": "DemoPersonCredential", "issuerProviderId": "sovereign_ngo", "issuerProviderDid": "did:web:demo.sovereign.ngo", "claims": { "synthetic": true } }] }]
+  },
+  {
+    "email": "ed@demo.sovereign.ngo", "password": "SovereignDemo!",
+    "profile": { "displayName": "Ed Erins", "description": "An emergency health visit followed by recovery at home." },
+    "pods": [{ "name": "ed", "records": [
+      { "providerId": "summitview_emergency_department", "category": "health", "summary": "Emergency visit discharge summary." },
+      { "providerId": "caringhands_home_health", "category": "health", "summary": "Home recovery follow-up scheduled." }
+    ], "credentials": [{ "type": "DemoPersonCredential", "issuerProviderId": "sovereign_ngo", "issuerProviderDid": "did:web:demo.sovereign.ngo", "claims": { "synthetic": true } }] }]
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "neighborhood_insurance_brokers": {
+      "selfActions": [
+        {
+          "id": "request_insurance_navigation",
+          "label": "Request insurance navigation support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "assess_coverage_needs",
+          "label": "Assess coverage needs"
+        },
+        {
+          "id": "compare_insurance_options",
+          "label": "Compare insurance options"
+        },
+        {
+          "id": "record_enrollment_support",
+          "label": "Record enrollment support"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "homestead_residential_leasing": {
+      "selfActions": [
+        {
+          "id": "request_housing_lease_support",
+          "label": "Request residential leasing support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "review_rental_application",
+          "label": "Review rental application"
+        },
+        {
+          "id": "execute_lease",
+          "label": "Execute lease"
+        },
+        {
+          "id": "record_move_in",
+          "label": "Record move-in"
+        }
+      ]
+    }
+  }
+}

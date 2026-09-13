@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "financial_wellness_center": {
+      "selfActions": [
+        {
+          "id": "request_money_management",
+          "label": "Request money management support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "assess_financial_needs",
+          "label": "Assess financial needs"
+        },
+        {
+          "id": "create_financial_plan",
+          "label": "Create financial plan"
+        },
+        {
+          "id": "record_coaching_progress",
+          "label": "Record coaching progress"
+        }
+      ]
+    }
+  }
+}

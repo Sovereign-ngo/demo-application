@@ -1,0 +1,11 @@
+{
+  "id": "united_states_passport_office",
+  "name": "United States Passport Office (Demo)",
+  "type": "passport-issuing-authority",
+  "roles": ["issuer", "verifier"],
+  "capabilities": ["identity-proofing", "passport-issuance"],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json",
+  "disclaimer": "Fictional demonstration service. It is not affiliated with the United States government and does not issue legal identity documents."
+}

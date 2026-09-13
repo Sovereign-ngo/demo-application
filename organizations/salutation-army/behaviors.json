@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "salutation_army": {
+      "selfActions": [
+        {
+          "id": "request_community_assistance",
+          "label": "Request community assistance"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "assess_community_needs",
+          "label": "Assess community needs"
+        },
+        {
+          "id": "coordinate_outreach_support",
+          "label": "Coordinate outreach support"
+        },
+        {
+          "id": "record_assistance_delivery",
+          "label": "Record assistance delivery"
+        }
+      ]
+    }
+  }
+}

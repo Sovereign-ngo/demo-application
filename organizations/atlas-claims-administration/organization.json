@@ -1,0 +1,18 @@
+{
+  "id": "atlas_claims_administration",
+  "name": "Atlas Claims Administration",
+  "type": "claims-administration-services",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "claims-processing",
+    "benefits-navigation",
+    "document-assistance"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

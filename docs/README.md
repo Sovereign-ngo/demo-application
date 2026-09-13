@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This repository centers on one primary experience: the **Individual Demo** at `demo_webapp/individual/`.
+This repository centers on one primary experience: the **Individual Tutorial** at `webapp/tutorial/individual/`.
 
 It demonstrates a sovereign data model where:
 
@@ -19,7 +19,6 @@ It demonstrates a sovereign data model where:
 - `docs/production-hardening-checklist.md`: actionable implementation checklist before any real-world data use.
 - `docs/control-matrix.md`: control-by-control evidence matrix mapped to concrete implementation anchors.
 - `docs/transaction-classes.md`: the six transaction classes used in the demo, with abilities, use cases, and examples.
-- `docs/implementation-roadmap.md`: phased path from current demo posture to production readiness.
 
 ## What The Individual Demo Does Today
 
@@ -41,37 +40,26 @@ It demonstrates a sovereign data model where:
 
 ## Supporting Surfaces Behind The Individual Demo
 
-The following pages support the Individual experience and are not intended as separate top-level demo products:
+The following surfaces support the Individual experience:
 
-- `demo_webapp/services/provider/`
-- `demo_webapp/services/verifier/`
-- `demo_webapp/services/credential-manager/`
-- `demo_webapp/services/solid-pod/`
+- `organizations/` (49 independently configured organization portals and APIs)
+- `webapp/tutorial/credential-manager/`
+- `webapp/tutorial/pod-manager/`
+
+Organization portal source is owned and deployed by each organization. Each portal is an independent Solid-OIDC client and establishes its own session with the resident's identity provider. The walkthrough passes the selected pod URL as navigation context, never an authentication token.
 
 ## Runtime Modes
 
-- **Static local mode**: session-scoped browser storage (`sessionStorage` + broadcast sync).
-- **Container mode**: same UI, with configurable Solid Pod-backed persistence.
+- **Local Compose mode**: the website, webapp, 49 organization services, and unmodified Community Solid Server run entirely on the local machine.
+- **Cloudflare mode**: static sites and organization Workers use the same built assets and Worker source; CSS runs in its dedicated container wrapper.
 
-Shared demo state logic lives in `demo_webapp/lib/demo-store.js`.
+Browser state is only an in-memory working copy. The selected Solid pod resource is authoritative; the Solid-OIDC library retains only authentication session material.
 
-## Cloudflare Function Scope
-
-Cloudflare Functions in `demo_webapp/functions/[[path]].js` are intentionally limited to one purpose:
-
-- Basic auth challenge on `/` and `/index.html` only.
-- No standards API, issuance, verification, or status-list logic runs in Cloudflare Functions.
+The organization-facing pod state client lives in `organizations/shared/pod-state.js`; tutorial-only coordination lives in `webapp/tutorial/shared/`.
 
 ## Container Topology
 
-`containerization/docker-compose.yml` models a multi-provider deployment with:
-
-- provider-scoped web portal routes under `/provider-sites/{providerId}/...`,
-- per-provider API container,
-- per-provider Solid pod container,
-- sovereign holder pod and gateway.
-
-Provider pod/API hops are wrapped in TLS and upstream certificates are verified at the gateway.
+`containerization/docker-compose.yml` defines the website, webapp, unmodified upstream Community Solid Server, and one local container for each organization. Every organization container runs the shared Cloudflare Worker through a Docker-only HTTP adapter embedded in `Dockerfile.organization`.
 
 ## Compliance And Security Posture (Demo)
 
@@ -91,32 +79,35 @@ For exact details, see:
 
 ## Current Limits
 
-- Provider API submission routes require bearer authorization and signed `vp_token` payloads.
-- Core service-portal exchange events are still demo-oriented operational traffic and not a full production wallet or trust framework.
+- Organization presentation submission currently validates only that JSON was supplied and returns a demo acceptance response.
+- Credential construction and service-portal exchange events are demo-oriented and are not cryptographically authoritative production issuance or a complete wallet/trust framework.
 - Status-list URLs in demo credentials are identifier-style references used for policy demonstration, not live public dereference endpoints in the static website deployment.
 
 ## Run The Individual Demo
 
-### Static Local Mode
-
-Open `demo_webapp/individual/index.html` directly (`file://`).
-
-### Container Mode
-
 From repo root:
 
 ```bash
-docker compose -f containerization/docker-compose.yml up --build
+make up
 ```
 
 Then open:
 
-- `https://localhost:8180/demo_webapp/individual/`
+- `http://localhost:8080/` for the landing website,
+- `http://localhost:8081/tutorial/individual/` for the tutorial,
+- `http://localhost:3000/` for Community Solid Server.
 
 Notes:
 
-- Container mode uses a self-signed dev certificate in `containerization/certs/`, so your browser will show a local certificate warning until trusted.
-- Provider API containers require `PROVIDER_API_SHARED_SECRET`; the compose file currently sets this for all provider API services and the gateway injects service authorization headers server-side.
+- Local CSS uses its memory configuration. Accounts and pods are discarded when the container is recreated.
+- The 49 local organization services use ports `8787` through `8835`.
+- The previous provider, standards, gateway, and custom CSS implementation is archived under `containerization/old/`.
+
+### Cloudflare Solid Pod Container
+
+The Cloudflare pod deployment uses `Dockerfile.css-fuse`, a temporary wrapper that mounts R2 through FUSE before starting upstream CSS. See `containerization/README.md` for its storage requirements and limitations.
+
+The Worker is deliberately only a transport router. CSS remains responsible for accounts, Solid-OIDC, WebIDs, pod creation, and resource authorization.
 
 ## Near-Term Direction
 
@@ -128,6 +119,6 @@ Notes:
 
 ## Repository Anchors
 
-- Demo app: `demo_webapp/`
+- Demo app: `webapp/`
 - Container orchestration: `containerization/`
 - Demo docs: `docs/`

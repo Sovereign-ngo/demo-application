@@ -1,0 +1,17 @@
+{
+  "id": "community_food_pantry",
+  "name": "Community Food Pantry",
+  "type": "food-assistance",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "food-assistance",
+    "community-assistance"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

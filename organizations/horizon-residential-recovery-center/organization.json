@@ -1,0 +1,18 @@
+{
+  "id": "horizon_residential_recovery_center",
+  "name": "Horizon Residential Recovery Center",
+  "type": "residential-recovery-services",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "residential-treatment",
+    "behavioral-health",
+    "care-continuity"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "bluepeak_medical_laboratory",
+  "name": "BluePeak Medical Laboratory",
+  "type": "medical-laboratory-services",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "medical-labs",
+    "diagnostics",
+    "referral-fulfillment"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

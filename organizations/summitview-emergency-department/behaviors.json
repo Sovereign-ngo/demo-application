@@ -1,0 +1,35 @@
+{
+  "configMap": {
+    "summitview_emergency_department": {
+      "selfActions": [
+        {
+          "id": "check_in_walk_in",
+          "label": "Check In (or Walk In)"
+        },
+        {
+          "id": "arrive_any",
+          "label": "Arrive, with or without an appointment"
+        },
+        {
+          "id": "request_emergency_care",
+          "label": "Request emergency care"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "record_emergency_triage",
+          "label": "Record emergency triage"
+        },
+        {
+          "id": "record_emergency_treatment",
+          "label": "Record emergency treatment"
+        },
+        {
+          "id": "prepare_discharge_plan",
+          "label": "Prepare discharge plan"
+        }
+      ],
+      "allowEmergencyOverride": true
+    }
+  }
+}

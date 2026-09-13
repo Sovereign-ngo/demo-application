@@ -1,0 +1,18 @@
+{
+  "id": "dignity_human_rights_organization",
+  "name": "Dignity Human Rights Organization",
+  "type": "human-rights-advocacy",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "human-rights-advocacy",
+    "legal-aid",
+    "community-assistance"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

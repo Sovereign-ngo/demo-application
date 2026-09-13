@@ -1,0 +1,17 @@
+{
+  "id": "clearwater_public_water_utility",
+  "name": "Clearwater Public Water Utility",
+  "type": "water-utility-services",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "utility-service",
+    "community-assistance"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

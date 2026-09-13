@@ -1,0 +1,18 @@
+{
+  "id": "neighborhood_insurance_brokers",
+  "name": "Neighborhood Insurance Brokers",
+  "type": "insurance-brokerage",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "benefits-navigation",
+    "document-assistance",
+    "community-assistance"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

@@ -1,0 +1,10 @@
+{
+  "organizationId": "nolichucky_family_clinic",
+  "trustedOrganizations": [
+    {
+      "id": "riverbend_dental_clinic",
+      "apiUrl": "https://riverbend.api.demo.sovereign.ngo/",
+      "relationships": ["referral-destination", "credential-verifier"]
+    }
+  ]
+}

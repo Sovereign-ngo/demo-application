@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "mainstreet_community_pharmacy": {
+      "selfActions": [
+        {
+          "id": "request_prescription_support",
+          "label": "Request prescription medication support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "validate_prescription",
+          "label": "Validate prescription"
+        },
+        {
+          "id": "dispense_medication",
+          "label": "Dispense medication"
+        },
+        {
+          "id": "record_medication_counseling",
+          "label": "Record medication counseling"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "caringhands_home_health",
+  "name": "CaringHands Home Health",
+  "type": "home-health-care",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "home-health",
+    "care-continuity",
+    "medical-records"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

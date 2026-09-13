@@ -1,0 +1,17 @@
+{
+  "id": "community_legal_aid_collective",
+  "name": "Community Legal Aid Collective",
+  "type": "legal-aid-services",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "legal-aid",
+    "benefits-navigation"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

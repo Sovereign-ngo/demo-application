@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "holston_wireless_carrier": {
+      "selfActions": [
+        {
+          "id": "request_wireless_service_support",
+          "label": "Request wireless service support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "verify_service_eligibility",
+          "label": "Verify service eligibility"
+        },
+        {
+          "id": "activate_wireless_service",
+          "label": "Activate wireless service"
+        },
+        {
+          "id": "record_connectivity_assistance",
+          "label": "Record connectivity assistance"
+        }
+      ]
+    }
+  }
+}

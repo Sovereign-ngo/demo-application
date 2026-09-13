@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "cornerstone_property_management": {
+      "selfActions": [
+        {
+          "id": "request_property_management_support",
+          "label": "Request residential property management support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "complete_move_in_inspection",
+          "label": "Complete move-in inspection"
+        },
+        {
+          "id": "coordinate_property_services",
+          "label": "Coordinate property services"
+        },
+        {
+          "id": "record_tenancy_support",
+          "label": "Record tenancy support"
+        }
+      ]
+    }
+  }
+}

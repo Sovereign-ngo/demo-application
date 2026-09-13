@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "dignity_human_rights_organization": {
+      "selfActions": [
+        {
+          "id": "request_human_rights_support",
+          "label": "Request human rights advocacy support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "document_rights_concern",
+          "label": "Document rights concern"
+        },
+        {
+          "id": "create_advocacy_plan",
+          "label": "Create advocacy plan"
+        },
+        {
+          "id": "record_advocacy_outcome",
+          "label": "Record advocacy outcome"
+        }
+      ]
+    }
+  }
+}

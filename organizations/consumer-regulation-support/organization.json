@@ -1,0 +1,19 @@
+{
+  "id": "consumer_regulation_support",
+  "name": "Consumer Regulation Support Office",
+  "type": "consumer-regulation",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "community-assistance",
+    "legal-aid",
+    "benefits-navigation",
+    "consumer-protection"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

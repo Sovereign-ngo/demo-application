@@ -1,0 +1,17 @@
+{
+  "id": "beacon_emergency_relief_services",
+  "name": "Beacon Emergency Relief Services",
+  "type": "emergency-relief-services",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "emergency-relief",
+    "community-assistance"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

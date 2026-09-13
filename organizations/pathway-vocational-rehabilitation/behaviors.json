@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "pathway_vocational_rehabilitation": {
+      "selfActions": [
+        {
+          "id": "request_vocational_rehab_support",
+          "label": "Request vocational rehabilitation support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "assess_vocational_needs",
+          "label": "Assess vocational needs"
+        },
+        {
+          "id": "create_rehabilitation_plan",
+          "label": "Create rehabilitation plan"
+        },
+        {
+          "id": "record_employment_progress",
+          "label": "Record employment progress"
+        }
+      ]
+    }
+  }
+}

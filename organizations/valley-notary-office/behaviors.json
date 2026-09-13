@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "valley_notary_office": {
+      "selfActions": [
+        {
+          "id": "request_notary_appointment",
+          "label": "Request notary appointment"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "verify_signer_identity",
+          "label": "Verify signer identity"
+        },
+        {
+          "id": "witness_signature",
+          "label": "Witness signature"
+        },
+        {
+          "id": "record_notarial_act",
+          "label": "Record notarial act"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "cedar_document_preparation_center",
+  "name": "Cedar Document Preparation Center",
+  "type": "document-preparation-services",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "document-assistance",
+    "benefits-navigation",
+    "consumer-protection"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

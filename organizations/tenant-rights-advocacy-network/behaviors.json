@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "tenant_rights_advocacy_network": {
+      "selfActions": [
+        {
+          "id": "request_tenant_rights_support",
+          "label": "Request tenant rights legal advocacy"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "assess_tenant_rights_issue",
+          "label": "Assess tenant-rights issue"
+        },
+        {
+          "id": "create_tenant_advocacy_plan",
+          "label": "Create tenant advocacy plan"
+        },
+        {
+          "id": "record_housing_resolution",
+          "label": "Record housing resolution"
+        }
+      ]
+    }
+  }
+}

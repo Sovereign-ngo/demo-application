@@ -1,0 +1,13 @@
+{
+  "configMap": {
+    "state_driver_licensing_agency": {
+      "selfActions": [
+        { "id": "apply_for_driver_license", "label": "Apply for a demonstration driver license credential" }
+      ],
+      "staffActions": [
+        { "id": "verify_identity_evidence", "label": "Verify identity evidence" },
+        { "id": "issue_driver_license_credential", "label": "Issue demonstration driver license credential" }
+      ]
+    }
+  }
+}

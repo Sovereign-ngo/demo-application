@@ -1,0 +1,18 @@
+{
+  "id": "youthpath_child_services",
+  "name": "YouthPath Child and Youth Services",
+  "type": "child-youth-services",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "child-youth-support",
+    "family-support",
+    "case-management"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

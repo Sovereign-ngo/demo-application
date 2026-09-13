@@ -1,0 +1,17 @@
+{
+  "id": "summitview_emergency_department",
+  "name": "Summitview Emergency Department",
+  "type": "acute-emergency-care",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "emergency-care",
+    "medical-records"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

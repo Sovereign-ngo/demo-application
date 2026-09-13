@@ -1,0 +1,17 @@
+{
+  "id": "valley_notary_office",
+  "name": "Valley Notary Office",
+  "type": "notary-services",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "document-assistance",
+    "legal-aid"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

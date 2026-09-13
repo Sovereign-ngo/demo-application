@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "beacon_emergency_relief_services": {
+      "selfActions": [
+        {
+          "id": "request_emergency_relief_support",
+          "label": "Request emergency relief support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "assess_immediate_needs",
+          "label": "Assess immediate needs"
+        },
+        {
+          "id": "authorize_emergency_aid",
+          "label": "Authorize emergency aid"
+        },
+        {
+          "id": "coordinate_relief_handoff",
+          "label": "Coordinate relief handoff"
+        }
+      ]
+    }
+  }
+}

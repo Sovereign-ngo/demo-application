@@ -1,0 +1,17 @@
+{
+  "id": "fairmannor_house",
+  "name": "FairMannor House",
+  "type": "homelessness-prevention",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "prevention-intake",
+    "housing-coordination"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

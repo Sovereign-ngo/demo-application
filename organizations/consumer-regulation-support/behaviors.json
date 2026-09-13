@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "consumer_regulation_support": {
+      "selfActions": [
+        {
+          "id": "request_consumer_regulation_support",
+          "label": "Request consumer regulation support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "review_consumer_complaint",
+          "label": "Review consumer complaint"
+        },
+        {
+          "id": "open_consumer_case",
+          "label": "Open consumer case"
+        },
+        {
+          "id": "record_regulatory_resolution",
+          "label": "Record regulatory resolution"
+        }
+      ]
+    }
+  }
+}

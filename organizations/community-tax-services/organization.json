@@ -1,0 +1,17 @@
+{
+  "id": "community_tax_services",
+  "name": "Community Tax Services",
+  "type": "tax-services",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "document-assistance",
+    "benefits-navigation"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

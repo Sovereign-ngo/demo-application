@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "horizon_residential_recovery_center": {
+      "selfActions": [
+        {
+          "id": "request_residential_recovery_support",
+          "label": "Request residential recovery support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "assess_residential_admission",
+          "label": "Assess residential admission"
+        },
+        {
+          "id": "create_recovery_plan",
+          "label": "Create recovery plan"
+        },
+        {
+          "id": "record_discharge_transition",
+          "label": "Record discharge transition"
+        }
+      ]
+    }
+  }
+}

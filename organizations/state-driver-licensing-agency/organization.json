@@ -1,0 +1,11 @@
+{
+  "id": "state_driver_licensing_agency",
+  "name": "State Driver Licensing Agency (Demo)",
+  "type": "driver-licensing-authority",
+  "roles": ["issuer", "verifier"],
+  "capabilities": ["identity-proofing", "driver-license-issuance", "state-id-issuance"],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json",
+  "disclaimer": "Fictional demonstration service. It is not affiliated with any government and does not issue legal identity documents."
+}

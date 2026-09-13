@@ -1,0 +1,18 @@
+{
+  "id": "pathway_vocational_rehabilitation",
+  "name": "Pathway Vocational Rehabilitation",
+  "type": "vocational-rehabilitation",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "vocational-rehab",
+    "employment-support",
+    "benefits-navigation"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

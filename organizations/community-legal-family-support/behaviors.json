@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "community_legal_family_support": {
+      "selfActions": [
+        {
+          "id": "request_legal_family_support",
+          "label": "Request legal and family support services"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "assess_legal_family_needs",
+          "label": "Assess legal and family needs"
+        },
+        {
+          "id": "create_legal_support_plan",
+          "label": "Create legal support plan"
+        },
+        {
+          "id": "record_case_resolution",
+          "label": "Record case resolution"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "summit_health_insurance_carrier",
+  "name": "Summit Health Insurance Carrier",
+  "type": "health-insurance-carrier-services",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "insurance-enrollment",
+    "benefits-navigation"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

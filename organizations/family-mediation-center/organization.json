@@ -1,0 +1,18 @@
+{
+  "id": "family_mediation_center",
+  "name": "Family Mediation Center",
+  "type": "family-mediation",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "family-support",
+    "mediation",
+    "stabilization"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

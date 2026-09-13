@@ -1,0 +1,10 @@
+{
+  "organizationId": "united_states_passport_office",
+  "trustedOrganizations": [
+    {
+      "id": "state_driver_licensing_agency",
+      "apiUrl": "https://driver-license.api.demo.sovereign.ngo/",
+      "relationships": ["identity-evidence-issuer"]
+    }
+  ]
+}

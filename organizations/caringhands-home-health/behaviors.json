@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "caringhands_home_health": {
+      "selfActions": [
+        {
+          "id": "request_home_health_support",
+          "label": "Request home health services"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "complete_home_health_assessment",
+          "label": "Complete home health assessment"
+        },
+        {
+          "id": "create_home_care_plan",
+          "label": "Create home care plan"
+        },
+        {
+          "id": "record_home_visit",
+          "label": "Record home visit"
+        }
+      ]
+    }
+  }
+}

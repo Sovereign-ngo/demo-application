@@ -1,0 +1,92 @@
+# Cloudflare Container storage wrapper for Community Solid Server (CSS).
+#
+# Cloudflare Container disks are currently ephemeral and Cloudflare does not yet
+# provide persistent Docker-style volume mounts. This wrapper exists only to
+# mount a private R2 bucket at CSS's standard /data path through FUSE. Remove
+# this wrapper and deploy the upstream CSS image directly when Cloudflare offers
+# a persistent volume that can be mounted at /data.
+#
+# CSS itself is not modified. The upstream image, server code, configuration,
+# and command remain authoritative; this image adds only the FUSE runtime and a
+# mount-before-exec entrypoint.
+FROM solidproject/community-server:7.2.0@sha256:73465522db316ec2c7c0417bdf5b1b2eab432c70fab44fb25ba2f2098e21b9e5
+
+ARG TIGRISFS_VERSION=1.2.2
+
+USER root
+
+COPY containerization/demo-users.json /config/demo-users.json
+
+RUN apk add --no-cache ca-certificates curl fuse tar util-linux \
+  && architecture="$(uname -m)" \
+  && if [ "$architecture" = "x86_64" ]; then architecture="amd64"; fi \
+  && if [ "$architecture" = "aarch64" ]; then architecture="arm64"; fi \
+  && curl -fsSL \
+    "https://github.com/tigrisdata/tigrisfs/releases/download/v${TIGRISFS_VERSION}/tigrisfs_${TIGRISFS_VERSION}_linux_${architecture}.tar.gz" \
+    -o /tmp/tigrisfs.tar.gz \
+  && tar -xzf /tmp/tigrisfs.tar.gz -C /usr/local/bin \
+  && chmod 0755 /usr/local/bin/tigrisfs \
+  && rm /tmp/tigrisfs.tar.gz
+
+# Keep the temporary mount wrapper self-contained in this Dockerfile. The
+# quoted heredoc prevents build-time expansion of runtime secrets and settings.
+RUN <<'ENTRYPOINT' sh
+cat > /usr/local/bin/cloudflare-r2-entrypoint <<'SCRIPT'
+#!/bin/sh
+set -eu
+
+: "${R2_ACCOUNT_ID:?R2_ACCOUNT_ID is required}"
+: "${R2_BUCKET_NAME:?R2_BUCKET_NAME is required}"
+: "${AWS_ACCESS_KEY_ID:?AWS_ACCESS_KEY_ID is required}"
+: "${AWS_SECRET_ACCESS_KEY:?AWS_SECRET_ACCESS_KEY is required}"
+
+mount_path="${R2_MOUNT_PATH:-/data}"
+r2_endpoint="https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com"
+
+mkdir -p "$mount_path"
+
+echo "[css-r2-wrapper] mounting R2 bucket at $mount_path"
+tigrisfs --endpoint "$r2_endpoint" -f "$R2_BUCKET_NAME" "$mount_path" &
+fuse_pid=$!
+
+mounted=false
+attempt=0
+while [ "$attempt" -lt 30 ]; do
+  if mountpoint -q "$mount_path"; then
+    mounted=true
+    break
+  fi
+
+  if ! kill -0 "$fuse_pid" 2>/dev/null; then
+    echo "[css-r2-wrapper] FUSE process exited before the mount became ready" >&2
+    wait "$fuse_pid"
+    exit 1
+  fi
+
+  attempt=$((attempt + 1))
+  sleep 1
+done
+
+if [ "$mounted" != true ]; then
+  echo "[css-r2-wrapper] timed out waiting for the R2 mount; refusing to start CSS" >&2
+  kill "$fuse_pid" 2>/dev/null || true
+  exit 1
+fi
+
+echo "[css-r2-wrapper] R2 mounted; starting the upstream CSS command"
+exec "$@"
+SCRIPT
+chmod 0755 /usr/local/bin/cloudflare-r2-entrypoint
+ENTRYPOINT
+
+ENV CSS_CONFIG=config/file.json
+ENV CSS_ROOT_FILE_PATH=/data
+ENV R2_MOUNT_PATH=/data
+
+# The entrypoint refuses to start CSS unless /data is a verified mount. This is
+# intentional: falling back to Cloudflare's ephemeral disk would appear to work
+# while silently losing accounts and pod data after the container sleeps.
+ENTRYPOINT ["/usr/local/bin/cloudflare-r2-entrypoint"]
+
+# This is the original command from the upstream CSS image.
+CMD ["node", "bin/server.js", "--seedConfig", "/config/demo-users.json"]

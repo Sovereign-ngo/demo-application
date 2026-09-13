@@ -1,0 +1,34 @@
+{
+  "configMap": {
+    "riverstone_radiology_center": {
+      "selfActions": [
+        {
+          "id": "check_in_walk_in",
+          "label": "Check In (or Walk In)"
+        },
+        {
+          "id": "arrive_any",
+          "label": "Arrive, with or without an appointment"
+        },
+        {
+          "id": "request_xray",
+          "label": "Request X-Ray"
+        },
+        {
+          "id": "request_ultrasound",
+          "label": "Request Ultrasound"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "fulfill_selected_referral",
+          "label": "Fulfill selected referral"
+        },
+        {
+          "id": "record_imaging_results",
+          "label": "Record imaging results"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "blue_river_natural_gas_utility": {
+      "selfActions": [
+        {
+          "id": "request_utility_service_support",
+          "label": "Request natural gas utility service support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "verify_service_address",
+          "label": "Verify service address"
+        },
+        {
+          "id": "activate_gas_service",
+          "label": "Activate gas service"
+        },
+        {
+          "id": "record_safety_assistance",
+          "label": "Record safety assistance"
+        }
+      ]
+    }
+  }
+}

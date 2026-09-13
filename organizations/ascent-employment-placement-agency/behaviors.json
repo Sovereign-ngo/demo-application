@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "ascent_employment_placement_agency": {
+      "selfActions": [
+        {
+          "id": "request_job_placement_support",
+          "label": "Request job placement support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "assess_employment_readiness",
+          "label": "Assess employment readiness"
+        },
+        {
+          "id": "match_job_opportunities",
+          "label": "Match job opportunities"
+        },
+        {
+          "id": "record_job_placement",
+          "label": "Record job placement"
+        }
+      ]
+    }
+  }
+}

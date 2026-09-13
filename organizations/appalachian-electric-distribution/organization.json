@@ -1,0 +1,18 @@
+{
+  "id": "appalachian_electric_distribution",
+  "name": "Appalachian Electric Distribution",
+  "type": "electric-utility-services",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "utility-service",
+    "document-assistance",
+    "community-assistance"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

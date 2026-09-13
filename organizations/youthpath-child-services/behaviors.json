@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "youthpath_child_services": {
+      "selfActions": [
+        {
+          "id": "request_child_youth_support",
+          "label": "Request child and youth services support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "assess_child_youth_needs",
+          "label": "Assess child and youth needs"
+        },
+        {
+          "id": "create_youth_support_plan",
+          "label": "Create youth support plan"
+        },
+        {
+          "id": "record_service_progress",
+          "label": "Record service progress"
+        }
+      ]
+    }
+  }
+}

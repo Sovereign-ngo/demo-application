@@ -1,0 +1,18 @@
+{
+  "id": "tri_county_ambulance",
+  "name": "Tri-County Ambulance",
+  "type": "ambulance-services",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "emergency-transport",
+    "emergency-care",
+    "care-continuity"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

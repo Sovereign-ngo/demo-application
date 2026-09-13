@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "appalachian_electric_distribution": {
+      "selfActions": [
+        {
+          "id": "request_utility_service_support",
+          "label": "Request electric utility service support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "verify_service_address",
+          "label": "Verify service address"
+        },
+        {
+          "id": "activate_electric_service",
+          "label": "Activate electric service"
+        },
+        {
+          "id": "record_outage_assistance",
+          "label": "Record outage assistance"
+        }
+      ]
+    }
+  }
+}

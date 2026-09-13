@@ -1,0 +1,15 @@
+{
+  // Production deployment for app.demo.sovereign.ngo.
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "sovereign-demo-app",
+  "compatibility_date": "2026-09-12",
+  "routes": [
+    {
+      "pattern": "app.demo.sovereign.ngo",
+      "custom_domain": true
+    }
+  ],
+  "assets": {
+    "directory": "../webapp/dist"
+  }
+}

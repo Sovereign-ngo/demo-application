@@ -1,0 +1,17 @@
+{
+  "id": "bridgeway_family_services",
+  "name": "Bridgeway Family Services",
+  "type": "family-stabilization",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "family-support",
+    "stabilization"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

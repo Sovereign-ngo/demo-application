@@ -1,0 +1,17 @@
+{
+  "id": "sunrise_child_day_center",
+  "name": "Sunrise Child Day Center",
+  "type": "child-day-care-services",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "child-care",
+    "family-support"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

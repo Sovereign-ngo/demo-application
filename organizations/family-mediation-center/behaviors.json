@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "family_mediation_center": {
+      "selfActions": [
+        {
+          "id": "request_family_mediation",
+          "label": "Request family mediation support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "assess_mediation_readiness",
+          "label": "Assess mediation readiness"
+        },
+        {
+          "id": "schedule_mediation",
+          "label": "Schedule mediation"
+        },
+        {
+          "id": "record_mediation_agreement",
+          "label": "Record mediation agreement"
+        }
+      ]
+    }
+  }
+}

@@ -14,7 +14,7 @@ Definition:
 
 Core abilities:
 - Intake, check-in, request support, and record internal service updates.
-- Issue service records and credentials that remain anchored to provider source-of-record.
+- Issue service records and credentials into resident-controlled demo state while identifying their source organization.
 
 Common use cases:
 - Clinic check-in and visit summary.
@@ -108,7 +108,7 @@ Definition:
 Core abilities:
 - Explicit grant and revoke behavior.
 - Non-identifiable audit export for transparency without raw-document disclosure.
-- Hash-linked evidence patterns in container mode.
+- Resident-controlled event history and non-identifiable accountability exports.
 
 Common use cases:
 - Demonstrating minimum-necessary sharing controls.

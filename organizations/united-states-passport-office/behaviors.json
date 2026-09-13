@@ -1,0 +1,13 @@
+{
+  "configMap": {
+    "united_states_passport_office": {
+      "selfActions": [
+        { "id": "apply_for_passport", "label": "Apply for a demonstration passport credential" }
+      ],
+      "staffActions": [
+        { "id": "verify_identity_evidence", "label": "Verify identity evidence" },
+        { "id": "issue_passport_credential", "label": "Issue demonstration passport credential" }
+      ]
+    }
+  }
+}

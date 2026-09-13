@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "clearwater_public_water_utility": {
+      "selfActions": [
+        {
+          "id": "request_utility_service_support",
+          "label": "Request public water utility service support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "verify_service_address",
+          "label": "Verify service address"
+        },
+        {
+          "id": "activate_water_service",
+          "label": "Activate water service"
+        },
+        {
+          "id": "record_water_assistance",
+          "label": "Record water assistance"
+        }
+      ]
+    }
+  }
+}

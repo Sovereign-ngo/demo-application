@@ -6,12 +6,11 @@ Date of this snapshot: **April 6, 2026**.
 
 ## Phase 0: Required Before Any Real Data
 
-- [ ] Replace shared static provider API secret with per-provider secrets and rotation policy.
-- [ ] Remove gateway hardcoded bearer injection; use service identity and short-lived credentials.
+- [ ] Introduce per-organization service identities, short-lived credentials, and rotation policy.
 - [ ] Introduce real user/staff authentication (OIDC/SAML or equivalent) with MFA support.
 - [ ] Replace browser session-stored private signing keys with managed key custody (HSM/KMS/wallet-managed).
 - [ ] Add replay protection store for nonce/jti with expiry and one-time use enforcement.
-- [ ] Add strict API rate limiting and abuse protections at gateway + service edge.
+- [ ] Add strict API rate limiting and abuse protections at each service edge.
 - [ ] Lock down CORS/origin policy for every API route in deployed environments.
 - [ ] Ensure no dev TLS private keys are committed to deployable repos.
 - [ ] Formalize incident response runbook and on-call ownership for security events.
@@ -37,7 +36,7 @@ Date of this snapshot: **April 6, 2026**.
 
 ## Phase 3: Assurance and External Readiness
 
-- [ ] Threat model and penetration testing on gateway, provider APIs, and storage boundaries.
+- [ ] Threat model and penetration testing on Workers, organization APIs, CSS, and storage boundaries.
 - [ ] Privacy impact assessment and security risk assessment sign-off.
 - [ ] Operational tabletop exercises (incident response, key compromise, provider compromise).
 - [ ] Deployment policy gates that block release when mandatory controls fail.

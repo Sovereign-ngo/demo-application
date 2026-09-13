@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "community_food_pantry": {
+      "selfActions": [
+        {
+          "id": "request_food_assistance",
+          "label": "Request food pantry support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "assess_food_need",
+          "label": "Assess food need"
+        },
+        {
+          "id": "prepare_food_distribution",
+          "label": "Prepare food distribution"
+        },
+        {
+          "id": "record_food_pickup",
+          "label": "Record food pickup"
+        }
+      ]
+    }
+  }
+}

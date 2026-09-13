@@ -1,0 +1,17 @@
+{
+  "id": "homestead_residential_leasing",
+  "name": "Homestead Residential Leasing",
+  "type": "residential-leasing-services",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "housing-access",
+    "housing-coordination"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

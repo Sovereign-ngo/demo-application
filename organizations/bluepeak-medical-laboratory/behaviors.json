@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "bluepeak_medical_laboratory": {
+      "selfActions": [
+        {
+          "id": "request_lab_testing_support",
+          "label": "Request medical laboratory testing"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "accept_lab_order",
+          "label": "Accept laboratory order"
+        },
+        {
+          "id": "record_specimen_collection",
+          "label": "Record specimen collection"
+        },
+        {
+          "id": "publish_lab_results",
+          "label": "Publish laboratory results"
+        }
+      ]
+    }
+  }
+}

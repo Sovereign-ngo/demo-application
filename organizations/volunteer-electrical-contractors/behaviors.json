@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "volunteer_electrical_contractors": {
+      "selfActions": [
+        {
+          "id": "request_electrical_service_support",
+          "label": "Request electrical contractor support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "inspect_electrical_need",
+          "label": "Inspect electrical need"
+        },
+        {
+          "id": "schedule_electrical_repair",
+          "label": "Schedule electrical repair"
+        },
+        {
+          "id": "record_repair_completion",
+          "label": "Record repair completion"
+        }
+      ]
+    }
+  }
+}

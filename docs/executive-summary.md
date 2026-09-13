@@ -28,11 +28,11 @@ It is designed to show how cross-agency coordination can improve without creatin
 ## 3) Accountability can exist without exposing full personal records
 
 - The demo includes non-identifiable audit export.
-- Provider API traffic can be audited in container mode with hash-linked records.
+- Tutorial activity can be reviewed through the resident-controlled event history and non-identifiable export.
 
 ## 4) Provider autonomy and interoperability can coexist
 
-- Every provider remains source-of-record for its own data.
+- Every organization keeps an independent interface, API surface, policy, and trust configuration while the resident-selected Solid pod remains authoritative for tutorial state.
 - Cross-provider exchange is modeled as consented, reviewable transactions.
 
 ## Why This Matters
@@ -54,8 +54,8 @@ This demo shows a practical alternative:
 
 ## Current Delivery Modes
 
-- Static local mode (`file://`) for portable demonstrations.
-- Container mode (`https://localhost:8180/...`) for observable provider API and provider pod exchange.
+- Local Docker Compose mode for the website, webapp, Solid server, and organization fleet.
+- Cloudflare mode for static sites, organization Workers, and the CSS container wrapper.
 
 ## Decision Guidance
 
@@ -64,4 +64,3 @@ This demo shows a practical alternative:
 - For production planning, use:
   - `docs/compliance-baseline.md`
   - `docs/production-hardening-checklist.md`
-  - `docs/implementation-roadmap.md`

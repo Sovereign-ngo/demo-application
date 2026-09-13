@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "atlas_claims_administration": {
+      "selfActions": [
+        {
+          "id": "request_claims_assistance",
+          "label": "Request insurance claims assistance"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "validate_claim_submission",
+          "label": "Validate claim submission"
+        },
+        {
+          "id": "adjudicate_claim",
+          "label": "Adjudicate claim"
+        },
+        {
+          "id": "publish_claim_status",
+          "label": "Publish claim status"
+        }
+      ]
+    }
+  }
+}

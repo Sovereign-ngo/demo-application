@@ -1,0 +1,19 @@
+{
+  "id": "riverstone_radiology_center",
+  "name": "Riverstone Radiology Center",
+  "type": "imaging-services",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "imaging",
+    "xray",
+    "ultrasound",
+    "referral-fulfillment"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

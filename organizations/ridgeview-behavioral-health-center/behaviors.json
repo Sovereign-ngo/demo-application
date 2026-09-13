@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "ridgeview_behavioral_health_center": {
+      "selfActions": [
+        {
+          "id": "request_behavioral_health_intake",
+          "label": "Request behavioral health intake"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "complete_behavioral_assessment",
+          "label": "Complete behavioral health assessment"
+        },
+        {
+          "id": "create_treatment_plan",
+          "label": "Create treatment plan"
+        },
+        {
+          "id": "record_outpatient_visit",
+          "label": "Record outpatient visit"
+        }
+      ]
+    }
+  }
+}

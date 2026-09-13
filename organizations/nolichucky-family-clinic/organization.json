@@ -1,0 +1,10 @@
+{
+  "id": "nolichucky_family_clinic",
+  "name": "Nolichucky Family Clinic",
+  "type": "primary-care",
+  "roles": ["provider", "issuer", "verifier"],
+  "capabilities": ["primary-care", "medical-records", "referral-source"],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

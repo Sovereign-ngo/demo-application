@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "safeharbor_shelter": {
+      "selfActions": [
+        {
+          "id": "request_shelter_bed",
+          "label": "Request emergency shelter support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "check_bed_availability",
+          "label": "Check bed availability"
+        },
+        {
+          "id": "complete_shelter_intake",
+          "label": "Complete shelter intake"
+        },
+        {
+          "id": "record_shelter_stay",
+          "label": "Record shelter stay"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  // Production deployment for pods.demo.sovereign.ngo.
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "sovereign-solid-pod",
+  "main": "./solid-pod-worker.js",
+  "compatibility_date": "2026-09-12",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true
+  },
+  "routes": [
+    {
+      "pattern": "pods.demo.sovereign.ngo",
+      "custom_domain": true
+    }
+  ],
+  "vars": {
+    "CSS_BASE_URL": "https://pods.demo.sovereign.ngo/",
+    "R2_ACCOUNT_ID": "replace-with-cloudflare-account-id",
+    "R2_BUCKET_NAME": "sovereign-solid-pods"
+  },
+  "containers": [
+    {
+      "class_name": "SolidPodContainer",
+      "image": "../containerization/Dockerfile.css-fuse",
+      "max_instances": 1,
+      "instance_type": "basic"
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "SOLID_POD",
+        "class_name": "SolidPodContainer"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["SolidPodContainer"]
+    }
+  ]
+}

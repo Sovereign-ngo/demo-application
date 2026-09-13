@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "community_legal_aid_collective": {
+      "selfActions": [
+        {
+          "id": "request_legal_aid_intake",
+          "label": "Request legal aid support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "screen_legal_eligibility",
+          "label": "Screen legal-aid eligibility"
+        },
+        {
+          "id": "open_legal_case",
+          "label": "Open legal case"
+        },
+        {
+          "id": "record_legal_outcome",
+          "label": "Record legal outcome"
+        }
+      ]
+    }
+  }
+}

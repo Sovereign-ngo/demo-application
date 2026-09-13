@@ -1,0 +1,18 @@
+{
+  "id": "mainstreet_community_pharmacy",
+  "name": "MainStreet Community Pharmacy",
+  "type": "pharmacy-services",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "pharmacy-services",
+    "medication-dispensing",
+    "care-continuity"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

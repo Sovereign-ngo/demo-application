@@ -1,0 +1,17 @@
+{
+  "id": "salutation_army",
+  "name": "Salutation Army",
+  "type": "community-assistance",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "community-assistance",
+    "outreach"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

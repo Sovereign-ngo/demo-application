@@ -1,0 +1,10 @@
+{
+  "id": "riverbend_dental_clinic",
+  "name": "Riverbend Dental Clinic",
+  "type": "dental-care-services",
+  "roles": ["provider", "issuer", "verifier"],
+  "capabilities": ["dental-care", "medical-records", "referral-fulfillment"],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

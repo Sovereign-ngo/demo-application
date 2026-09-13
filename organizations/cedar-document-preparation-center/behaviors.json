@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "cedar_document_preparation_center": {
+      "selfActions": [
+        {
+          "id": "request_document_preparation_support",
+          "label": "Request document preparation support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "review_document_request",
+          "label": "Review document request"
+        },
+        {
+          "id": "prepare_document_packet",
+          "label": "Prepare document packet"
+        },
+        {
+          "id": "record_document_delivery",
+          "label": "Record document delivery"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "community_legal_family_support",
+  "name": "Community Legal and Family Support Services",
+  "type": "legal-family-support",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "legal-aid",
+    "benefits-navigation",
+    "family-support"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "commonwealth_credit_union": {
+      "selfActions": [
+        {
+          "id": "request_credit_union_intake",
+          "label": "Request credit union services"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "verify_membership_eligibility",
+          "label": "Verify membership eligibility"
+        },
+        {
+          "id": "open_member_account",
+          "label": "Open member account"
+        },
+        {
+          "id": "record_financial_coaching",
+          "label": "Record financial coaching"
+        }
+      ]
+    }
+  }
+}

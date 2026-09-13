@@ -1,0 +1,18 @@
+{
+  "id": "holston_wireless_carrier",
+  "name": "Holston Wireless Carrier",
+  "type": "wireless-telecommunications-services",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "telecommunications-service",
+    "document-assistance",
+    "community-assistance"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "foothills_disability_support_services": {
+      "selfActions": [
+        {
+          "id": "request_disability_support",
+          "label": "Request disability support services"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "assess_accessibility_needs",
+          "label": "Assess accessibility needs"
+        },
+        {
+          "id": "coordinate_disability_support",
+          "label": "Coordinate disability support"
+        },
+        {
+          "id": "record_accommodation_plan",
+          "label": "Record accommodation plan"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "volunteer_electrical_contractors",
+  "name": "Volunteer Electrical Contractors",
+  "type": "electrical-contractor-services",
+  "roles": [
+    "provider",
+    "issuer",
+    "verifier"
+  ],
+  "capabilities": [
+    "home-repair",
+    "housing-stability",
+    "utility-service"
+  ],
+  "behaviorDefinition": "./behaviors.json",
+  "credentialIssuePolicy": "./credentials-issue.json",
+  "credentialVerifyPolicy": "./credentials-verify.json"
+}

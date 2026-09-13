@@ -1,0 +1,29 @@
+{
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/health",
+      "handler": "health"
+    },
+    {
+      "method": "GET",
+      "path": "/info",
+      "handler": "info"
+    },
+    {
+      "method": "GET",
+      "path": "/trust",
+      "handler": "trust"
+    },
+    {
+      "method": "GET",
+      "path": "/config.js",
+      "handler": "config"
+    },
+    {
+      "method": "POST",
+      "path": "/presentations/submit",
+      "handler": "submitPresentation"
+    }
+  ]
+}

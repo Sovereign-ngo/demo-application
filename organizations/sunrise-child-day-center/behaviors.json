@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "sunrise_child_day_center": {
+      "selfActions": [
+        {
+          "id": "request_child_care_support",
+          "label": "Request child day care support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "verify_childcare_eligibility",
+          "label": "Verify child-care eligibility"
+        },
+        {
+          "id": "enroll_childcare_program",
+          "label": "Enroll child-care program"
+        },
+        {
+          "id": "record_childcare_attendance",
+          "label": "Record child-care attendance"
+        }
+      ]
+    }
+  }
+}

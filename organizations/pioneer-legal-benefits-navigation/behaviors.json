@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "pioneer_legal_benefits_navigation": {
+      "selfActions": [
+        {
+          "id": "request_legal_navigation",
+          "label": "Request legal and benefits navigation"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "screen_benefit_eligibility",
+          "label": "Screen benefit eligibility"
+        },
+        {
+          "id": "prepare_benefit_application",
+          "label": "Prepare benefit application"
+        },
+        {
+          "id": "record_benefit_determination",
+          "label": "Record benefit determination"
+        }
+      ]
+    }
+  }
+}

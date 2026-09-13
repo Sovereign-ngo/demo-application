@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "summit_health_insurance_carrier": {
+      "selfActions": [
+        {
+          "id": "request_health_insurance_support",
+          "label": "Request health insurance enrollment support"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "verify_coverage_eligibility",
+          "label": "Verify coverage eligibility"
+        },
+        {
+          "id": "enroll_health_coverage",
+          "label": "Enroll health coverage"
+        },
+        {
+          "id": "record_prior_authorization",
+          "label": "Record prior authorization"
+        }
+      ]
+    }
+  }
+}

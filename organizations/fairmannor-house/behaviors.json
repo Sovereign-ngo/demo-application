@@ -1,0 +1,26 @@
+{
+  "configMap": {
+    "fairmannor_house": {
+      "selfActions": [
+        {
+          "id": "request_prevention_intake",
+          "label": "Request homelessness prevention intake"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "assess_housing_risk",
+          "label": "Assess housing risk"
+        },
+        {
+          "id": "create_housing_navigation_plan",
+          "label": "Create housing navigation plan"
+        },
+        {
+          "id": "record_housing_match",
+          "label": "Record housing match"
+        }
+      ]
+    }
+  }
+}

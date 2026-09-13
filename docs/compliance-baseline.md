@@ -6,10 +6,10 @@ Date of this snapshot: **April 6, 2026**.
 
 ## Scope
 
-- Primary scope: `demo_webapp/individual/` and supporting service portals.
+- Primary scope: `webapp/tutorial/individual/` and its supporting tutorial tools.
 - Deployment contexts:
-  - local static (`file://`),
-  - containerized demo (`https://localhost:8180/...`).
+  - local Docker Compose over `http://localhost` ports,
+  - Cloudflare static assets, Workers, and the CSS container wrapper.
 - This baseline assumes **synthetic demo data only**.
 
 ## What Is Already Enforced In Demo
@@ -20,32 +20,33 @@ Date of this snapshot: **April 6, 2026**.
 - Referrals are explicit and auditable.
 - Cross-provider record access pass flow is explicit and scoped.
 
-### 2) Cryptographic exchange checks in containerized provider API
+### 2) Credential policy modeling
 
-- `vp_token` signature and claims checks.
-- VC proof JWT checks (`vc+jwt`, EdDSA).
-- VC structure checks, status-list metadata checks, issuer/subject matching checks.
+- Organization policies declare proof formats, algorithms, required claims, issuer relationships, subject matching, validity, and status requirements.
+- These policies demonstrate the intended contract; the current Worker does not enforce production-grade cryptographic verification.
 
-### 3) Auditable provider API trail
+### 3) Resident-controlled tutorial event history
 
-- Provider API writes hash-chained JSONL audit rows.
+- Demo events are written to the selected Solid pod with the rest of the tutorial state.
+- A durable organization-side audit ledger is not implemented.
 
-### 4) Transport security in container topology
+### 4) Deployment transport
 
-- Gateway-to-provider API and gateway-to-provider pod hops are TLS-wrapped and certificate-verified in demo topology.
+- Local Compose intentionally uses loopback HTTP.
+- Cloudflare custom domains terminate public TLS at the edge.
 
-### 5) Basic perimeter gate for root entry
+### 5) Solid authentication
 
-- Basic auth is enforced at `/` and `/index.html`.
+- Community Solid Server provides account management and Solid-OIDC authentication for pod access.
 
 ### 6) Non-identifiable export path for accountability
 
 - Individual view supports non-identifiable audit export for demonstration of accountability without raw source-document disclosure.
 
-### 7) Container-only live standards routing
+### 7) Explicit organization trust declarations
 
-- Container topology exposes DID resolver, trust registry, and status-list dereference endpoints through gateway paths.
-- Static `file://` mode intentionally does not expose these network endpoints.
+- Every organization owns a trust manifest and exposes it through `/trust`.
+- Trust declarations are demo metadata and are not yet a production trust registry.
 
 ## Demo-Only Controls (Not Production Compliant)
 
@@ -53,27 +54,25 @@ Date of this snapshot: **April 6, 2026**.
 
 - Login is selection-based in UI (no production IAM, no MFA, no hardware-backed auth).
 
-### 2) Shared secret model is static and global in compose
+### 2) Organization API authorization is incomplete
 
-- Provider API shared secret is static demo value.
-- Gateway injects provider API authorization header server-side.
+- The organization Worker currently accepts presentation JSON without authenticating the calling service or enforcing the declared verification policy.
 
 ### 3) Replay protection is partial
 
 - Challenge/nonce consistency is checked, but there is no persistent nonce/jti replay ledger.
 
-### 4) Key custody is browser-session level
+### 4) Key custody is not production-grade
 
-- Signing key material is generated and cached in browser session storage in portal UI.
+- Demo credential construction occurs in browser code and is not backed by managed issuer keys.
 
 ### 5) Privacy minimization is not strict in interactive screens
 
 - Service views still expose human-readable identifiers and raw event feeds.
 
-### 6) Static mode does not host live registries
+### 6) Live trust and status infrastructure is absent
 
-- Status-list and DID/trust routes are available only in container mode.
-- Static deployment remains offline and non-networked by design.
+- Status-list references are illustrative and no production DID resolver, issuer registry, or status service is included.
 
 ### 7) Administrative and operational controls are incomplete
 

@@ -1,0 +1,14 @@
+{
+  "configMap": {
+    "riverbend_dental_clinic": {
+      "selfActions": [
+        { "id": "request_dental_care_support", "label": "Request dental care support" }
+      ],
+      "staffActions": [
+        { "id": "complete_dental_assessment", "label": "Complete dental assessment" },
+        { "id": "record_dental_treatment", "label": "Record dental treatment" },
+        { "id": "create_dental_care_plan", "label": "Create dental care plan" }
+      ]
+    }
+  }
+}

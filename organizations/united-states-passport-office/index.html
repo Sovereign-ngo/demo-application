@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>United States Passport Office — Sovereign Demo</title>
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <style>
+    :root {
+      --bg: #f4f8fc;
+      --panel: #ffffff;
+      --line: #c8d8e7;
+      --ink: #1f2f3f;
+      --muted: #4c5f73;
+      --brand: #005eb8;
+      --accent: #0b4f86;
+    }
+    
+    * { box-sizing: border-box; }
+    
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top right, #deebf8, var(--bg) 55%);
+      color: var(--ink);
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+    
+    .wrap {
+      width: min(1180px, 96vw);
+      margin: 0 auto;
+      padding: 12px 0 16px;
+      display: grid;
+      gap: 10px;
+    }
+    
+    .mast {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      padding: 10px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    
+    h1 {
+      margin: 0;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: #144768;
+    }
+    
+    .sub {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+    
+    .profile-summary {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.35;
+      white-space: pre-line;
+    }
+    
+    .meta {
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-align: left;
+      word-break: break-all;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      padding: 10px;
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+    
+    .wide {
+      grid-column: 1 / -1;
+    }
+    
+    .panel h2 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: #164969;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 7px 9px;
+      background: #f7fbff;
+    }
+    
+    label {
+      display: grid;
+      gap: 4px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    
+    select,
+    button,
+    input {
+      font: inherit;
+    }
+    
+    select,
+    input[type="file"] {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      padding: 8px 9px;
+      width: 100%;
+    }
+    
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      align-items: center;
+    }
+    
+    button {
+      border: 1px solid #0b4f86;
+      border-radius: 999px;
+      background: var(--brand);
+      color: #fff;
+      padding: 8px 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    
+    button.secondary {
+      border-color: #5b7288;
+      background: #eef4f8;
+      color: #2d4358;
+    }
+    
+    button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+    
+    @keyframes tutorialNextPulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 210, 45, 0.62); }
+      70% { box-shadow: 0 0 0 12px rgba(255, 210, 45, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 210, 45, 0); }
+    }
+    
+    .tutorial-next-click {
+      outline: 5px solid #ffd22d !important;
+      outline-offset: 2px !important;
+      box-shadow: 0 0 0 4px rgba(255, 210, 45, 0.35), 0 0 24px rgba(255, 210, 45, 0.74) !important;
+      animation: tutorialNextPulse 1.15s ease-in-out infinite !important;
+      filter: saturate(1.18) !important;
+    }
+    
+    .mono {
+      margin: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f8fbfe;
+      padding: 8px;
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 0.74rem;
+      color: #2e4357;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    
+    ul {
+      margin: 0;
+      padding-left: 18px;
+      color: #41566b;
+      font-size: 0.84rem;
+      display: grid;
+      gap: 5px;
+    }
+    
+    .checkbox {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    
+    .checkbox input {
+      width: auto;
+      margin: 0;
+    }
+    
+    .note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+    
+    @media (max-width: 860px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="mast">
+      <div>
+        <h1 id="portalTitle">Identity VC Issuer</h1>
+        <p class="sub" id="portalSubtitle">Identity Verifier Service Portal (Browser Demo)</p>
+        <p class="note">Fictional demonstration only. Not affiliated with the United States government; credentials issued here are not legal identity documents.</p>
+        <p class="profile-summary" id="profileSummary"></p>
+      </div>
+      <div class="meta">
+        <div id="issuerDid">Issuer DID</div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="panel">
+        <h2>Login</h2>
+        <label>
+          Sovereign Identity
+          <select id="identitySelect"></select>
+        </label>
+        <div class="row">
+          <button id="loginBtn" type="button">LOGIN</button>
+          <button id="newJohnDoeBtn" class="secondary" type="button">New John Doe</button>
+        </div>
+        <p class="note">Subject DID (from login):</p>
+        <p id="subjectDid" class="mono">Not logged in.</p>
+      </article>
+
+      <article class="panel">
+        <h2>Verify Document</h2>
+        <label>
+          Evidence File (optional)
+          <input id="docFile" type="file">
+        </label>
+        <label class="checkbox">
+          <input id="consentToStore" type="checkbox" checked>
+          Store issued credential in sovereign demo data
+        </label>
+        <button id="verifyBtn" type="button" disabled>Verify and Issue VC</button>
+        <p id="verifyResult" class="mono">No verification yet.</p>
+      </article>
+
+      <article class="panel wide">
+        <h2>Issued Credentials for Logged-In Subject</h2>
+        <ul id="credentialList"></ul>
+      </article>
+
+      <article class="panel wide">
+        <h2>Live Event Feed (Most Recent 12)</h2>
+        <pre id="eventFeed" class="mono">[]</pre>
+      </article>
+    </section>
+  </main>
+
+  <script src="/tutorial/shared/bridge.global.js"></script>
+  <script src="/tutorial/provider-catalog.global.js"></script>
+  <script src="/config/credentials-issue.js"></script>
+  <script src="/config.js"></script>
+  <script src="/shared/solid-session.js"></script>
+  <script src="/shared/pod-config.js"></script>
+  <script src="/shared/pod-storage.js"></script>
+  <script src="/shared/pod-state.js"></script>
+  <script>
+    (function () {
+      const tutorialBridgeApi = window.SovereignTutorialBridge;
+      if (!tutorialBridgeApi || typeof tutorialBridgeApi.createTutorialBridge !== 'function') {
+        document.body.innerHTML = '<main class="wrap"><p>Tutorial bridge failed to load.</p></main>';
+        return;
+      }
+      const { createTutorialBridge } = tutorialBridgeApi;
+
+      const store = window.SovereignPodState;
+      if (!store) {
+        document.body.innerHTML = '<main class="wrap"><p>Pod state client failed to load.</p></main>';
+        return;
+      }
+      const solidSession = window.SovereignSolidSession;
+
+      const verifierProfiles = window.SovereignVerifierProfiles;
+      if (!verifierProfiles || typeof verifierProfiles !== 'object') {
+        document.body.innerHTML = '<main class="wrap"><p>Verifier profile config failed to load.</p></main>';
+        return;
+      }
+
+      const { profileConfigs, defaultProfile } = verifierProfiles;
+      const query = new URLSearchParams(window.location.search);
+      const requestedProfileKey = query.get('profile') || defaultProfile;
+      const activeProfileKey = profileConfigs[requestedProfileKey] ? requestedProfileKey : defaultProfile;
+      const profile = profileConfigs[activeProfileKey];
+      const issuerProviderId = profile.issuerProviderId || `verifier_${activeProfileKey}`;
+
+      const byId = (id) => document.getElementById(id);
+      const asIso = () => new Date().toISOString();
+      const tutorialHighlightIds = [
+        'loginBtn',
+        'newJohnDoeBtn',
+        'verifyBtn',
+        'identitySelect',
+        'docFile',
+        'consentToStore'
+      ];
+
+      let currentSubjectWebId = '';
+      let identityByWebId = new Map();
+
+      const credentialHasTypeForEntry = (entry, type) => store.credentialHasType(entry, type);
+      const credentialIssuerProviderIdForEntry = (entry) => String(store.credentialIssuerProviderId(entry) || '').trim();
+      const credentialIssuedAtForEntry = (entry) => String(store.credentialIssuedAt(entry) || '').trim();
+      const credentialPrimaryTypeForEntry = (entry) => String(store.credentialPrimaryType(entry) || '').trim();
+      const credentialVcForEntry = (entry) => store.credentialAsW3cVc(entry);
+
+      const tutorialBridge = createTutorialBridge({
+        byId,
+        highlightIds: tutorialHighlightIds,
+        statePayload: () => {
+          const consentToStore = Boolean(byId('consentToStore') && byId('consentToStore').checked);
+          const canVerify = Boolean(byId('verifyBtn') && !byId('verifyBtn').disabled);
+          return {
+            type: 'provider-state',
+            providerId: issuerProviderId,
+            isLoggedIn: Boolean(currentSubjectWebId),
+            hasOpenReferral: false,
+            selectedIdentityWebId: String((byId('identitySelect') && byId('identitySelect').value) || ''),
+            selectedStaffActionId: '',
+            selectedSelfActionId: '',
+            selectedReferralId: '',
+            selectedReferralOpen: false,
+            consentToStore,
+            canVerify
+          };
+        }
+      });
+
+      const postTutorialState = () => tutorialBridge.postState();
+
+      const fillSelect = (selectEl, options, placeholder) => {
+        selectEl.innerHTML = '';
+        if (!Array.isArray(options) || options.length === 0) {
+          const option = document.createElement('option');
+          option.value = '';
+          option.textContent = placeholder || 'No options available';
+          selectEl.appendChild(option);
+          return;
+        }
+
+        options.forEach((entry) => {
+          const option = document.createElement('option');
+          option.value = entry.value;
+          option.textContent = entry.label;
+          selectEl.appendChild(option);
+        });
+      };
+
+      const refreshIdentityOptions = () => {
+        const identities = store.listIdentities({ excludeStaff: true });
+        identityByWebId = new Map(identities.map((entry) => [entry.webId, entry]));
+        fillSelect(
+          byId('identitySelect'),
+          identities.map((entry) => ({ value: entry.webId, label: `${entry.displayName} (${entry.webId})` })),
+          'No identities available'
+        );
+        if (currentSubjectWebId) {
+          byId('identitySelect').value = currentSubjectWebId;
+        }
+      };
+
+      const refreshLoginState = () => {
+        byId('subjectDid').textContent = currentSubjectWebId || 'Not logged in.';
+        byId('verifyBtn').disabled = !currentSubjectWebId;
+        postTutorialState();
+      };
+
+      const refreshCredentialList = () => {
+        const listEl = byId('credentialList');
+        listEl.innerHTML = '';
+
+        if (!currentSubjectWebId) {
+          const li = document.createElement('li');
+          li.textContent = 'Login required to view credentials.';
+          listEl.appendChild(li);
+          return;
+        }
+
+        const credentials = store
+          .listCredentials(currentSubjectWebId)
+          .filter((entry) => (
+            credentialHasTypeForEntry(entry, profile.credentialType) ||
+            credentialIssuerProviderIdForEntry(entry) === issuerProviderId
+          ))
+          .slice(0, 12);
+
+        if (!credentials.length) {
+          const li = document.createElement('li');
+          li.textContent = 'No credentials issued for this verifier profile yet.';
+          listEl.appendChild(li);
+          return;
+        }
+
+        credentials.forEach((entry) => {
+          const li = document.createElement('li');
+          li.textContent = `${credentialIssuedAtForEntry(entry)} | ${credentialPrimaryTypeForEntry(entry)} | ${entry.id}`;
+          listEl.appendChild(li);
+        });
+      };
+
+      const refreshEventFeed = () => {
+        const events = store.listEvents({ providerId: issuerProviderId, limit: 12 });
+        byId('eventFeed').textContent = JSON.stringify(events, null, 2);
+      };
+
+      const renderHeader = () => {
+        byId('portalTitle').textContent = profile.label;
+        byId('portalSubtitle').textContent = 'Passport Credential Issuing Portal (Browser Demo)';
+        byId('profileSummary').textContent = `Credential Type: ${profile.credentialType}\nSubmit Route: ${profile.submitRoute}`;
+        byId('issuerDid').textContent = `Issuer DID: ${profile.issuerDid}`;
+      };
+
+      const handleLogin = async () => {
+        await solidSession.ready;
+        if (!solidSession.info.isLoggedIn) {
+          await solidSession.login({ oidcIssuer: window.SovereignRuntimeConfig.services.pods, redirectUrl: window.location.href });
+          return;
+        }
+        currentSubjectWebId = solidSession.info.webId || '';
+
+        if (currentSubjectWebId) {
+          store.addEvent({
+            type: 'subject-login',
+            providerId: issuerProviderId,
+            subjectWebId: currentSubjectWebId,
+            actorWebId: currentSubjectWebId,
+            message: `${profile.label}: subject login`,
+            payload: {
+              verifierProfile: activeProfileKey
+            }
+          });
+        }
+
+        refreshLoginState();
+        refreshCredentialList();
+        refreshEventFeed();
+      };
+
+      const handleNewJohnDoe = () => {
+        const identity = store.createJohnDoe({
+          foundNotes: `Generated for ${profile.label} browser demo flow.`
+        });
+        refreshIdentityOptions();
+        byId('identitySelect').value = identity.webId;
+        currentSubjectWebId = identity.webId;
+
+        store.addEvent({
+          type: 'identity-created-for-verification',
+          providerId: issuerProviderId,
+          subjectWebId: currentSubjectWebId,
+          actorWebId: currentSubjectWebId,
+          message: `${profile.label}: created ${identity.displayName} for verification flow`,
+          payload: {
+            verifierProfile: activeProfileKey
+          },
+          severity: 'warning'
+        });
+
+        refreshLoginState();
+        refreshCredentialList();
+        refreshEventFeed();
+      };
+
+      const runVerification = () => {
+        if (!currentSubjectWebId) {
+          byId('verifyResult').textContent = 'Login required before verifying documents.';
+          return;
+        }
+
+        const identity = identityByWebId.get(currentSubjectWebId) || {
+          webId: currentSubjectWebId,
+          displayName: currentSubjectWebId
+        };
+        const claims = Object.fromEntries(Object.entries(profile.claims || {}).map(([key, value]) => [
+          key,
+          value === '{{subjectName}}' ? identity.displayName : value
+        ]));
+        const consentToStore = byId('consentToStore').checked;
+        const fileInput = byId('docFile');
+        const file = fileInput && fileInput.files ? fileInput.files[0] : null;
+        const documentName = file ? file.name : 'mock-document-upload';
+
+        let storedCredential = null;
+        let credentialPayload = null;
+        const candidateCredential = store.buildVerifiableCredential({
+          credentialType: profile.credentialType,
+          issuerDid: profile.issuerDid,
+          issuerName: profile.label,
+          subjectWebId: currentSubjectWebId,
+          subjectName: identity.displayName,
+          claims,
+          issuedAt: asIso()
+        });
+        if (consentToStore) {
+          storedCredential = store.issueCredential({
+            subjectWebId: currentSubjectWebId,
+            issuerProviderId,
+            issuerProviderDid: profile.issuerDid,
+            type: profile.credentialType,
+            claims,
+            metadata: {
+              verifierProfile: activeProfileKey,
+              issuerDid: profile.issuerDid,
+              submitRoute: profile.submitRoute,
+              documentName,
+              claims
+            }
+          });
+        } else {
+          credentialPayload = candidateCredential;
+        }
+
+        const credentialId = storedCredential ? storedCredential.id : credentialPayload.id;
+
+        store.addEvent({
+          type: 'identity-vc-issued',
+          providerId: issuerProviderId,
+          subjectWebId: currentSubjectWebId,
+          actorWebId: currentSubjectWebId,
+          message: `${profile.label}: issued ${profile.credentialType}`,
+          payload: {
+            verifierProfile: activeProfileKey,
+            credentialType: profile.credentialType,
+            credentialId,
+            consentToStore
+          }
+        });
+
+        const result = {
+          ok: true,
+          verifierProfile: activeProfileKey,
+          issuerDid: profile.issuerDid,
+          authenticatedWebId: currentSubjectWebId,
+          extractedData: claims,
+          consentToStore,
+          credential: storedCredential
+            ? credentialVcForEntry(storedCredential)
+            : credentialPayload,
+          walletStore: consentToStore
+            ? { ok: true, storedCredentialId: storedCredential.id }
+            : { ok: true, skipped: true, reason: 'permission not granted to write to sovereign demo data' }
+        };
+
+        byId('verifyResult').textContent = JSON.stringify(result, null, 2);
+        refreshCredentialList();
+        refreshEventFeed();
+      };
+
+      const boot = async () => {
+        await solidSession.ready;
+        if (solidSession.info.isLoggedIn) currentSubjectWebId = solidSession.info.webId || '';
+        renderHeader();
+        refreshIdentityOptions();
+        refreshLoginState();
+        refreshCredentialList();
+        refreshEventFeed();
+
+        byId('loginBtn').addEventListener('click', () => handleLogin().catch((error) => { byId('subjectDid').textContent = error.message; }));
+        byId('newJohnDoeBtn').addEventListener('click', handleNewJohnDoe);
+        byId('verifyBtn').addEventListener('click', runVerification);
+        byId('identitySelect').addEventListener('change', postTutorialState);
+        byId('consentToStore').addEventListener('change', postTutorialState);
+
+        store.subscribe(() => {
+          refreshIdentityOptions();
+          refreshCredentialList();
+          refreshEventFeed();
+          postTutorialState();
+        });
+
+        postTutorialState();
+      };
+
+      boot();
+    })();
+  </script>
+</body>
+</html>

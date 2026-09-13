@@ -1,0 +1,27 @@
+{
+  "configMap": {
+    "tri_county_ambulance": {
+      "selfActions": [
+        {
+          "id": "request_emergency_transport",
+          "label": "Request emergency transport"
+        }
+      ],
+      "staffActions": [
+        {
+          "id": "record_emergency_assessment",
+          "label": "Record emergency assessment"
+        },
+        {
+          "id": "record_patient_transport",
+          "label": "Record patient transport"
+        },
+        {
+          "id": "complete_hospital_handoff",
+          "label": "Complete hospital handoff"
+        }
+      ],
+      "allowEmergencyOverride": true
+    }
+  }
+}
