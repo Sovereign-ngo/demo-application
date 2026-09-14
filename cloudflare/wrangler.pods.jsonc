@@ -1,6 +1,6 @@
 {
   // Production deployment for pods.demo.sovereign.ngo.
-  "name": "sovereign-solid-pod",
+  "name": "sovereign-demo-pods",
   "main": "./solid-pod-worker.js",
   "compatibility_date": "2026-09-12",
   "compatibility_flags": ["nodejs_compat"],
