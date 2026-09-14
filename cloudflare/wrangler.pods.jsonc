@@ -16,12 +16,13 @@
   "vars": {
     "CSS_BASE_URL": "https://pods.demo.sovereign.ngo/",
     "R2_ACCOUNT_ID": "ff9a3bd8a4043509e3f1b0fbad25a4cd",
-    "R2_BUCKET_NAME": "sovereign-solid-pods"
+    "R2_BUCKET_NAME": "sovereign-demo-pods"
   },
   "containers": [
     {
       "class_name": "SolidPodContainer",
       "image": "../containerization/Dockerfile.css-fuse",
+      "image_build_context": "..",
       "max_instances": 1,
       "instance_type": "basic"
     }
