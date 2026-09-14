@@ -1,6 +1,6 @@
 {
   // Production deployment for demo.sovereign.ngo.
-  "name": "sovereign-demo-app",
+  "name": "sovereign-demo",
   "compatibility_date": "2026-09-12",
   "routes": [
     {
