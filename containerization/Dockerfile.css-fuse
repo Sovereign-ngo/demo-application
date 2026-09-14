@@ -50,6 +50,7 @@ tigrisfs \
   --endpoint "$r2_endpoint" \
   --region auto \
   --list-type 2 \
+  --no-detect \
   -f \
   "$R2_BUCKET_NAME" \
   "$mount_path" &
