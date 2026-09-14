@@ -15,7 +15,7 @@
   ],
   "vars": {
     "CSS_BASE_URL": "https://pods.demo.sovereign.ngo/",
-    "R2_ACCOUNT_ID": "replace-with-cloudflare-account-id",
+    "R2_ACCOUNT_ID": "ff9a3bd8a4043509e3f1b0fbad25a4cd",
     "R2_BUCKET_NAME": "sovereign-solid-pods"
   },
   "containers": [
