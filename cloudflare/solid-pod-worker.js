@@ -9,11 +9,34 @@ export class SolidPodContainer extends DurableObject {
   constructor(ctx, env) {
     super(ctx, env);
     this.env = env;
+    this.ready = false;
+    this.startup = null;
 
     ctx.blockConcurrencyWhile(() => ctx.container.setInactivityTimeout(30 * 60 * 1000));
   }
 
   async ensureReady() {
+    if (this.ready && this.ctx.container.running) {
+      return this.ctx.container.getTcpPort(CONTAINER_PORT);
+    }
+    if (this.startup) return this.startup;
+
+    this.ready = false;
+    this.startup = this.startAndWait().then(
+      (port) => {
+        this.ready = true;
+        this.startup = null;
+        return port;
+      },
+      (error) => {
+        this.startup = null;
+        throw error;
+      }
+    );
+    return this.startup;
+  }
+
+  async startAndWait() {
     if (!this.ctx.container.running) {
       this.ctx.container.start({
         env: {
