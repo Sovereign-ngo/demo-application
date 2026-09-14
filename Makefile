@@ -6,7 +6,7 @@ WRANGLER := npx wrangler
 .DEFAULT_GOAL := help
 
 .PHONY: help install build build-webapp build-organization-portals up down clean stop restart logs ps check test test-basic test-providers test-journeys test-deployed-journeys \
-	cloudflare-check cloudflare-check-pods cloudflare-check-website \
+	cloudflare-check cloudflare-check-pods \
 	cloudflare-check-app cloudflare-check-organizations \
 	cloudflare-deploy-organizations cloudflare-dev-pods cloudflare-deploy-pods
 
@@ -85,13 +85,10 @@ test-journeys:
 test-deployed-journeys:
 	node --test tests/deployed-user-journeys.test.js
 
-cloudflare-check: cloudflare-check-pods cloudflare-check-website cloudflare-check-app cloudflare-check-organizations
+cloudflare-check: cloudflare-check-pods cloudflare-check-app cloudflare-check-organizations
 
 cloudflare-check-pods:
 	$(WRANGLER) deploy --dry-run --config cloudflare/wrangler.pods.jsonc
-
-cloudflare-check-website:
-	$(WRANGLER) deploy --dry-run --config cloudflare/wrangler.website.jsonc
 
 cloudflare-check-app: build-webapp
 	$(WRANGLER) deploy --dry-run --config cloudflare/wrangler.app.jsonc

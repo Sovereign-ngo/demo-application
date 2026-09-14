@@ -94,7 +94,7 @@ make up
 Then open:
 
 - `http://localhost:8080/` for the landing website,
-- `http://localhost:8081/tutorial/individual/` for the tutorial,
+- `http://localhost:8080/tutorial/individual/` for the tutorial,
 - `http://localhost:3000/` for Community Solid Server.
 
 Notes:

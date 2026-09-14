@@ -6,7 +6,7 @@
   "vars": {
     "DEPLOYMENT_ENVIRONMENT": "production",
     "WEBSITE_URL": "https://demo.sovereign.ngo/",
-    "APP_URL": "https://app.demo.sovereign.ngo/",
+    "APP_URL": "https://demo.sovereign.ngo/",
     "PODS_URL": "https://pods.demo.sovereign.ngo/"
   },
   "assets": {

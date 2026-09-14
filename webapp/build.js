@@ -9,6 +9,7 @@ const output = resolve(root, 'dist');
 
 const staticEntries = [
   'tutorial',
+  'landing.css',
   'style.css',
   'index.html',
   'robots.txt',

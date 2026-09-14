@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { loadBrowserGlobal, loadOrganizations } from './helpers.js';
 
-const appUrl = process.env.DEPLOYED_APP_URL || 'https://app.demo.sovereign.ngo/';
+const appUrl = process.env.DEPLOYED_APP_URL || 'https://demo.sovereign.ngo/';
 const apiDomain = process.env.DEPLOYED_API_DOMAIN || 'api.demo.sovereign.ngo';
 const hostnameOverrides = {
   nolichucky_family_clinic: 'nolichucky.api.demo.sovereign.ngo',

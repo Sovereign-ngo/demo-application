@@ -44,7 +44,7 @@ Override the defaults with `DEPLOYED_APP_URL` and `DEPLOYED_API_DOMAIN` when tes
 
 ### First Solid login
 
-1. Start the stack and open `http://localhost:8081/tutorial/pod-manager/`.
+1. Start the stack and open `http://localhost:8080/tutorial/pod-manager/`.
 2. Select **Create account and pod**. Register an account in CSS, then create a pod from the CSS account page. CSS automatically creates and links a WebID when no external WebID is supplied.
 3. Return to the Solid pod page and select **Log in with Solid**. Authenticate with the account and approve the WebID when CSS asks.
 4. Select the discovered pod and choose **Use selected pod**.
@@ -62,8 +62,7 @@ The complete local host map is:
 
 | Local URL | Production URL | Responsibility |
 | --- | --- | --- |
-| `http://localhost:8080` | `https://demo.sovereign.ngo` | Demo explanation website |
-| `http://localhost:8081` | `https://app.demo.sovereign.ngo` | Shared role-based demo application |
+| `http://localhost:8080` | `https://demo.sovereign.ngo` | Landing page and shared role-based demo application |
 | `http://localhost:3000` | `https://pods.demo.sovereign.ngo` | Community Solid Server |
 | `http://localhost:8789` | `https://passport.api.demo.sovereign.ngo` | Demonstration passport issuer |
 | `http://localhost:8790` | `https://driver-license.api.demo.sovereign.ngo` | Demonstration state driver licensing agency |

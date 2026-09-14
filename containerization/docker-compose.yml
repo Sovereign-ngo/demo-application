@@ -1,15 +1,4 @@
 services:
-  demo:
-    build:
-      context: ..
-      dockerfile: containerization/Dockerfile.website
-    container_name: sovereign-demo-site
-    environment:
-      DEPLOYMENT_ENVIRONMENT: local
-      APP_URL: http://localhost:8081/
-    ports:
-      - "8080:8080"
-
   app:
     build:
       context: ..
@@ -18,11 +7,11 @@ services:
     environment:
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
       ORGANIZATION_URLS_JSON: '{"nolichucky_family_clinic":"http://localhost:8787/","riverbend_dental_clinic":"http://localhost:8788/","riverstone_radiology_center":"http://localhost:8791/","summitview_emergency_department":"http://localhost:8792/","fairmannor_house":"http://localhost:8793/","safeharbor_shelter":"http://localhost:8794/","community_food_pantry":"http://localhost:8795/","bridgeway_family_services":"http://localhost:8796/","family_mediation_center":"http://localhost:8797/","salutation_army":"http://localhost:8798/","pioneer_legal_benefits_navigation":"http://localhost:8799/","tenant_rights_advocacy_network":"http://localhost:8800/","community_legal_family_support":"http://localhost:8801/","financial_wellness_center":"http://localhost:8802/","community_tax_services":"http://localhost:8803/","consumer_regulation_support":"http://localhost:8804/","commonwealth_credit_union":"http://localhost:8805/","neighborhood_insurance_brokers":"http://localhost:8806/","valley_notary_office":"http://localhost:8807/","community_legal_aid_collective":"http://localhost:8808/","ascent_employment_placement_agency":"http://localhost:8809/","rapid_response_temporary_help":"http://localhost:8810/","cedar_document_preparation_center":"http://localhost:8811/","brightpath_educational_support_center":"http://localhost:8812/","ridgeview_behavioral_health_center":"http://localhost:8813/","bluepeak_medical_laboratory":"http://localhost:8814/","caringhands_home_health":"http://localhost:8815/","tri_county_ambulance":"http://localhost:8816/","foothills_disability_support_services":"http://localhost:8817/","pathway_vocational_rehabilitation":"http://localhost:8818/","dignity_human_rights_organization":"http://localhost:8819/","appalachian_electric_distribution":"http://localhost:8820/","holston_wireless_carrier":"http://localhost:8821/","blue_river_natural_gas_utility":"http://localhost:8822/","volunteer_electrical_contractors":"http://localhost:8823/","foothills_plumbing_hvac_contractors":"http://localhost:8824/","clearwater_public_water_utility":"http://localhost:8825/","mainstreet_community_pharmacy":"http://localhost:8826/","homestead_residential_leasing":"http://localhost:8827/","cornerstone_property_management":"http://localhost:8828/","summit_health_insurance_carrier":"http://localhost:8829/","atlas_claims_administration":"http://localhost:8830/","sunrise_child_day_center":"http://localhost:8831/","youthpath_child_services":"http://localhost:8832/","beacon_emergency_relief_services":"http://localhost:8833/","horizon_residential_recovery_center":"http://localhost:8834/","highland_workforce_training_institute":"http://localhost:8835/","united_states_passport_office":"http://localhost:8789/","state_driver_licensing_agency":"http://localhost:8790/"}'
     ports:
-      - "8081:8080"
+      - "8080:8080"
 
   solid:
     image: solidproject/community-server:7.2.0@sha256:73465522db316ec2c7c0417bdf5b1b2eab432c70fab44fb25ba2f2098e21b9e5
@@ -49,7 +38,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8789/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
       PASSPORT_API_URL: http://localhost:8789/
       DRIVER_LICENSE_API_URL: http://localhost:8790/
@@ -71,7 +60,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8790/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
       PASSPORT_API_URL: http://localhost:8789/
       DRIVER_LICENSE_API_URL: http://localhost:8790/
@@ -93,7 +82,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8787/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
       PASSPORT_API_URL: http://localhost:8789/
       DRIVER_LICENSE_API_URL: http://localhost:8790/
@@ -115,7 +104,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8788/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
       PASSPORT_API_URL: http://localhost:8789/
       DRIVER_LICENSE_API_URL: http://localhost:8790/
@@ -136,7 +125,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8791/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8791:8787"
@@ -152,7 +141,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8792/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8792:8787"
@@ -168,7 +157,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8793/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8793:8787"
@@ -184,7 +173,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8794/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8794:8787"
@@ -200,7 +189,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8795/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8795:8787"
@@ -216,7 +205,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8796/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8796:8787"
@@ -232,7 +221,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8797/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8797:8787"
@@ -248,7 +237,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8798/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8798:8787"
@@ -264,7 +253,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8799/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8799:8787"
@@ -280,7 +269,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8800/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8800:8787"
@@ -296,7 +285,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8801/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8801:8787"
@@ -312,7 +301,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8802/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8802:8787"
@@ -328,7 +317,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8803/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8803:8787"
@@ -344,7 +333,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8804/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8804:8787"
@@ -360,7 +349,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8805/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8805:8787"
@@ -376,7 +365,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8806/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8806:8787"
@@ -392,7 +381,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8807/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8807:8787"
@@ -408,7 +397,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8808/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8808:8787"
@@ -424,7 +413,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8809/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8809:8787"
@@ -440,7 +429,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8810/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8810:8787"
@@ -456,7 +445,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8811/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8811:8787"
@@ -472,7 +461,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8812/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8812:8787"
@@ -488,7 +477,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8813/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8813:8787"
@@ -504,7 +493,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8814/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8814:8787"
@@ -520,7 +509,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8815/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8815:8787"
@@ -536,7 +525,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8816/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8816:8787"
@@ -552,7 +541,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8817/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8817:8787"
@@ -568,7 +557,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8818/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8818:8787"
@@ -584,7 +573,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8819/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8819:8787"
@@ -600,7 +589,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8820/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8820:8787"
@@ -616,7 +605,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8821/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8821:8787"
@@ -632,7 +621,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8822/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8822:8787"
@@ -648,7 +637,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8823/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8823:8787"
@@ -664,7 +653,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8824/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8824:8787"
@@ -680,7 +669,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8825/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8825:8787"
@@ -696,7 +685,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8826/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8826:8787"
@@ -712,7 +701,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8827/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8827:8787"
@@ -728,7 +717,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8828/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8828:8787"
@@ -744,7 +733,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8829/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8829:8787"
@@ -760,7 +749,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8830/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8830:8787"
@@ -776,7 +765,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8831/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8831:8787"
@@ -792,7 +781,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8832/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8832:8787"
@@ -808,7 +797,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8833/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8833:8787"
@@ -824,7 +813,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8834/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8834:8787"
@@ -840,7 +829,7 @@ services:
       ORGANIZATION_API_URL: http://localhost:8835/
       DEPLOYMENT_ENVIRONMENT: local
       WEBSITE_URL: http://localhost:8080/
-      APP_URL: http://localhost:8081/
+      APP_URL: http://localhost:8080/
       PODS_URL: http://localhost:3000/
     ports:
       - "8835:8787"

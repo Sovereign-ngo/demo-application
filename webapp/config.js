@@ -4,7 +4,7 @@ window.SovereignRuntimeConfig = Object.freeze({
   environment: 'production',
   services: Object.freeze({
     website: 'https://demo.sovereign.ngo/',
-    app: 'https://app.demo.sovereign.ngo/',
+    app: 'https://demo.sovereign.ngo/',
     pods: 'https://pods.demo.sovereign.ngo/',
     organizations: Object.freeze({
       united_states_passport_office: 'https://passport.api.demo.sovereign.ngo/',

@@ -1,10 +1,10 @@
 {
-  // Production deployment for app.demo.sovereign.ngo.
+  // Production deployment for demo.sovereign.ngo.
   "name": "sovereign-demo-app",
   "compatibility_date": "2026-09-12",
   "routes": [
     {
-      "pattern": "app.demo.sovereign.ngo",
+      "pattern": "demo.sovereign.ngo",
       "custom_domain": true
     }
   ],
