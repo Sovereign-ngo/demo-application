@@ -57,7 +57,8 @@ export class SolidPodContainer extends DurableObject {
     let lastError;
     for (let attempt = 0; attempt < START_ATTEMPTS; attempt += 1) {
       try {
-        await port.fetch('http://container/');
+        const probe = await port.fetch('http://container/');
+        await probe.body?.cancel();
         return port;
       } catch (error) {
         lastError = error;

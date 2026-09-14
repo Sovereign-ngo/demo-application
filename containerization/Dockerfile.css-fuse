@@ -50,7 +50,6 @@ tigrisfs \
   --endpoint "$r2_endpoint" \
   --region auto \
   --list-type 2 \
-  --debug_s3 \
   --uid 0 \
   --gid 0 \
   --dir-mode 0770 \
