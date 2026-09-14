@@ -1,5 +1,4 @@
 {
-  "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "sovereign-demo-organization",
   "main": "./organization-worker.js",
   "compatibility_date": "2026-09-12",

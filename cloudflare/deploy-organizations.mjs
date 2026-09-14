@@ -4,7 +4,6 @@ import { spawnSync } from 'node:child_process';
 
 const root = resolve(import.meta.dirname, '..');
 const organizationRoot = resolve(root, 'organizations');
-const wrangler = resolve(import.meta.dirname, 'node_modules/.bin/wrangler');
 const config = resolve(import.meta.dirname, 'wrangler.organization.jsonc');
 const dryRun = process.argv.includes('--dry-run');
 const hostnameOverrides = {
@@ -36,6 +35,6 @@ for (const organization of organizations) {
   ];
   if (dryRun) args.push('--dry-run');
   console.log(`${dryRun ? 'Checking' : 'Deploying'} ${organization.name} (${hostname})`);
-  const result = spawnSync(wrangler, args, { cwd: root, stdio: 'inherit' });
+  const result = spawnSync('npx', ['wrangler', ...args], { cwd: root, stdio: 'inherit' });
   if (result.status !== 0) process.exit(result.status || 1);
 }

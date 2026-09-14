@@ -1,7 +1,7 @@
 SHELL := /bin/sh
 
 COMPOSE := docker compose -f containerization/docker-compose.yml
-WRANGLER := ./cloudflare/node_modules/.bin/wrangler
+WRANGLER := npx wrangler
 
 .DEFAULT_GOAL := help
 
@@ -34,7 +34,6 @@ help:
 		'make cloudflare-deploy-pods  Deploy the Solid pod Worker and CSS container'
 
 install:
-	npm --prefix cloudflare install
 	npm --prefix webapp install
 
 build-webapp:
@@ -98,10 +97,10 @@ cloudflare-check-app: build-webapp
 	$(WRANGLER) deploy --dry-run --config cloudflare/wrangler.app.jsonc
 
 cloudflare-check-organizations: build-organization-portals
-	node cloudflare/deploy-organizations.js --dry-run
+	node cloudflare/deploy-organizations.mjs --dry-run
 
 cloudflare-deploy-organizations: build-organization-portals
-	node cloudflare/deploy-organizations.js
+	node cloudflare/deploy-organizations.mjs
 
 cloudflare-dev-pods:
 	$(WRANGLER) dev --config cloudflare/wrangler.pods.jsonc

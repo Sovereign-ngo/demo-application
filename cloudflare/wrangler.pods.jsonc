@@ -1,6 +1,5 @@
 {
   // Production deployment for pods.demo.sovereign.ngo.
-  "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "sovereign-solid-pod",
   "main": "./solid-pod-worker.js",
   "compatibility_date": "2026-09-12",
