@@ -2,49 +2,51 @@ import { DurableObject } from 'cloudflare:workers';
 
 const CONTAINER_ID = 'shared-solid-server';
 const CONTAINER_PORT = 3000;
+const START_ATTEMPTS = 240;
+const START_RETRY_MS = 500;
 
 export class SolidPodContainer extends DurableObject {
   constructor(ctx, env) {
     super(ctx, env);
     this.env = env;
 
-    ctx.blockConcurrencyWhile(async () => {
-      await ctx.container.setInactivityTimeout(30 * 60 * 1000);
-      this.startContainer();
-    });
+    ctx.blockConcurrencyWhile(() => ctx.container.setInactivityTimeout(30 * 60 * 1000));
   }
 
-  startContainer() {
-    if (this.ctx.container.running) return;
-    this.ctx.container.start({
-      env: {
-        CSS_PORT: String(CONTAINER_PORT),
-        CSS_BASE_URL: this.env.CSS_BASE_URL,
-        CSS_CONFIG: 'config/file.json',
-        CSS_ROOT_FILE_PATH: '/data',
-        R2_ACCOUNT_ID: this.env.R2_ACCOUNT_ID,
-        R2_BUCKET_NAME: this.env.R2_BUCKET_NAME,
-        AWS_ACCESS_KEY_ID: this.env.R2_ACCESS_KEY_ID,
-        AWS_SECRET_ACCESS_KEY: this.env.R2_SECRET_ACCESS_KEY
-      },
-      enableInternet: true
-    });
-  }
+  async ensureReady() {
+    if (!this.ctx.container.running) {
+      this.ctx.container.start({
+        env: {
+          CSS_PORT: String(CONTAINER_PORT),
+          CSS_BASE_URL: this.env.CSS_BASE_URL,
+          CSS_CONFIG: 'config/file.json',
+          CSS_ROOT_FILE_PATH: '/data',
+          R2_ACCOUNT_ID: this.env.R2_ACCOUNT_ID,
+          R2_BUCKET_NAME: this.env.R2_BUCKET_NAME,
+          AWS_ACCESS_KEY_ID: this.env.R2_ACCESS_KEY_ID,
+          AWS_SECRET_ACCESS_KEY: this.env.R2_SECRET_ACCESS_KEY
+        },
+        enableInternet: true
+      });
+    }
 
-  async fetch(request) {
-    this.startContainer();
     const port = this.ctx.container.getTcpPort(CONTAINER_PORT);
     let lastError;
-    for (let attempt = 0; attempt < 240; attempt += 1) {
+    for (let attempt = 0; attempt < START_ATTEMPTS; attempt += 1) {
       try {
         await port.fetch('http://container/');
-        return port.fetch(request);
+        return port;
       } catch (error) {
         lastError = error;
-        await new Promise((resolve) => setTimeout(resolve, 500));
+        await new Promise((resolve) => setTimeout(resolve, START_RETRY_MS));
       }
     }
     throw lastError;
+  }
+
+  async fetch(request) {
+    const port = await this.ensureReady();
+    return port.fetch(request);
   }
 }
 

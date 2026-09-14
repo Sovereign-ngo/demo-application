@@ -51,6 +51,10 @@ tigrisfs \
   --region auto \
   --list-type 2 \
   --no-detect \
+  --uid 0 \
+  --gid 0 \
+  --dir-mode 0770 \
+  --file-mode 0660 \
   -f \
   "$R2_BUCKET_NAME" \
   "$mount_path" &
