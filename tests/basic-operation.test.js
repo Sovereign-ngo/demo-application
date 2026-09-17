@@ -41,6 +41,29 @@ test('local provider contracts use operations supported by the local server', as
   }
 });
 
+test('organization issuance catalogs are organization-specific', async () => {
+  const organizations = await loadOrganizations();
+  const misplacedDentalCredentials = new Set([
+    'BirthCertificateCredential',
+    'UtilityBillCredential',
+    'ProofOfResidencyCredential',
+    'SocialSecurityCredential'
+  ]);
+
+  for (const [id, entry] of Object.entries(organizations)) {
+    const catalog = entry.credentialsIssue;
+    const credentials = Object.keys(catalog.credentials || {});
+    const profiles = Object.values(catalog.profiles || {});
+    assert.ok(credentials.length || profiles.length, `${id} has no issuable credential`);
+    assert.ok(!credentials.includes('ServiceRecordCredential'), `${id} still uses the generic issuance credential`);
+
+    if (id === 'riverbend_dental_clinic') {
+      assert.ok(profiles.every((profile) => profile.credentialType.startsWith('Dental')));
+      assert.ok(profiles.every((profile) => !misplacedDentalCredentials.has(profile.credentialType)));
+    }
+  }
+});
+
 test('shared organization Worker selects production hosts and local container IDs', async () => {
   const production = await organizationWorker.fetch(
     new Request('https://passport.api.demo.sovereign.ngo/health'),

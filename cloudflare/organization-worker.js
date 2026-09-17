@@ -1,4 +1,5 @@
 import entities from '../organizations/registry.js';
+import demoTrustPolicy from '../organizations/demo-trust-policy.json' with { type: 'json' };
 
 const organizationHostnameAliases = Object.freeze({
   nolichucky: 'nolichucky_family_clinic',
@@ -55,14 +56,28 @@ const trustEndpointOverrides = (env) => {
 const handlers = {
   health: ({ organization }) => json({ ok: true, organizationId: organization.id }),
   info: ({ organization }) => json({ ...organization, transactions: [] }),
-  trust: ({ trust, env }) => {
+  trust: ({ organization, trust, env }) => {
     const overrides = trustEndpointOverrides(env);
-    return json({
-      organizationId: trust.organizationId,
-      trustedOrganizations: trust.trustedOrganizations.map((peer) => ({
+    const configuredPeers = new Map(trust.trustedOrganizations.map((peer) => [peer.id, peer]));
+    const trustedOrganizations = demoTrustPolicy.mode === 'all-organizations'
+      ? Object.keys(entities)
+        .filter((id) => id !== organization.id)
+        .sort()
+        .map((id) => {
+          const configured = configuredPeers.get(id);
+          return {
+            id,
+            apiUrl: overrides[id] || configured?.apiUrl || `https://${hostnameFor(id)}/`,
+            relationships: configured?.relationships || demoTrustPolicy.defaultRelationships
+          };
+        })
+      : trust.trustedOrganizations.map((peer) => ({
         ...peer,
         apiUrl: overrides[peer.id] || peer.apiUrl
-      }))
+      }));
+    return json({
+      organizationId: trust.organizationId,
+      trustedOrganizations
     });
   },
   config: ({ organization, env, request }) => {

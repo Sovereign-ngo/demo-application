@@ -1,0 +1,7 @@
+{
+  "mode": "all-organizations",
+  "defaultRelationships": [
+    "demo-interoperability",
+    "credential-verifier"
+  ]
+}

@@ -19,14 +19,6 @@
             ]
           },
           {
-            "id": "utility-bill-credential-issuer",
-            "title": "Utility Bill Credential Issuer (221122 - Electric Power Distribution)",
-            "type": "identity-evidence-issuer",
-            "endpointKeys": [
-              "verifier_utility_bill"
-            ]
-          },
-          {
             "id": "blue-river-natural-gas-utility",
             "title": "Blue River Natural Gas Utility (221210 - Natural Gas Distribution)",
             "type": "natural-gas-utility-services",
@@ -204,14 +196,6 @@
             "type": "residential-leasing-services",
             "endpointKeys": [
               "homestead_residential_leasing"
-            ]
-          },
-          {
-            "id": "proof-of-residency-credential-issuer",
-            "title": "Proof of Residency Credential Issuer (531110 - Lessors of Residential Buildings and Dwellings)",
-            "type": "identity-evidence-issuer",
-            "endpointKeys": [
-              "verifier_proof_of_residency"
             ]
           },
           {
@@ -595,25 +579,6 @@
     "title": "92 - Public Administration",
     "note": "Government administration organizations that issue identity and civil-document credentials in this fictional demo.",
     "subsectors": [
-      {
-        "id": "naics-923",
-        "title": "923 - Administration of Human Resource Programs",
-        "note": "Vital records and social insurance administration.",
-        "services": [
-          {
-            "id": "birth-certificate-credential-issuer",
-            "title": "Birth Certificate Credential Issuer (923120 - Administration of Public Health Programs)",
-            "type": "identity-vc-issuer",
-            "endpointKeys": ["verifier_birth_certificate"]
-          },
-          {
-            "id": "social-security-credential-issuer",
-            "title": "Social Security Credential Issuer (923130 - Administration of Human Resource Programs)",
-            "type": "identity-vc-issuer",
-            "endpointKeys": ["verifier_social_security"]
-          }
-        ]
-      },
       {
         "id": "naics-926",
         "title": "926 - Administration of Economic Programs",

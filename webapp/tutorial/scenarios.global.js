@@ -2,8 +2,8 @@
 const tutorialChains = [
       {
         id: 'onboard-all-documents',
-        title: "I Lost My Wallet—Help Me Rebuild My Identity",
-        description: 'Rebuild a complete trusted document set after identification is lost or unavailable.',
+        title: "I Lost My Wallet—Help Me Re-establish Photo ID",
+        description: 'Re-establish trusted state and federal photo identification after a wallet is lost.',
         steps: [
           {
             groupId: 'naics-92',
@@ -24,46 +24,6 @@ const tutorialChains = [
             instruction: "Click LOGIN, then click Verify and Issue VC.",
             action: { kind: 'verify', requireConsentToStore: true },
             expectedEvent: { type: 'identity-vc-issued', providerId: 'united_states_passport_office', credentialType: 'PassportCredential' }
-          },
-          {
-            groupId: 'naics-92',
-            subsectorId: 'naics-923',
-            serviceId: 'birth-certificate-credential-issuer',
-            endpointKey: 'verifier_birth_certificate',
-            label: 'Issue birth certificate credential',
-            instruction: "Click LOGIN, then click Verify and Issue VC.",
-            action: { kind: 'verify', requireConsentToStore: true },
-            expectedEvent: { type: 'identity-vc-issued', providerId: 'riverbend_dental_clinic', credentialType: 'BirthCertificateCredential' }
-          },
-          {
-            groupId: 'naics-22',
-            subsectorId: 'naics-221',
-            serviceId: 'utility-bill-credential-issuer',
-            endpointKey: 'verifier_utility_bill',
-            label: 'Issue utility bill credential',
-            instruction: "Click LOGIN, then click Verify and Issue VC.",
-            action: { kind: 'verify', requireConsentToStore: true },
-            expectedEvent: { type: 'identity-vc-issued', providerId: 'riverbend_dental_clinic', credentialType: 'UtilityBillCredential' }
-          },
-          {
-            groupId: 'naics-53',
-            subsectorId: 'naics-531',
-            serviceId: 'proof-of-residency-credential-issuer',
-            endpointKey: 'verifier_proof_of_residency',
-            label: 'Issue proof of residency credential',
-            instruction: "Click LOGIN, then click Verify and Issue VC.",
-            action: { kind: 'verify', requireConsentToStore: true },
-            expectedEvent: { type: 'identity-vc-issued', providerId: 'riverbend_dental_clinic', credentialType: 'ProofOfResidencyCredential' }
-          },
-          {
-            groupId: 'naics-92',
-            subsectorId: 'naics-923',
-            serviceId: 'social-security-credential-issuer',
-            endpointKey: 'verifier_social_security',
-            label: 'Issue social security credential',
-            instruction: "Click LOGIN, then click Verify and Issue VC.",
-            action: { kind: 'verify', requireConsentToStore: true },
-            expectedEvent: { type: 'identity-vc-issued', providerId: 'riverbend_dental_clinic', credentialType: 'SocialSecurityCredential' }
           }
         ]
       },

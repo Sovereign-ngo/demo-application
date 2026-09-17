@@ -1,6 +1,14 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { loadOrganizations } from './helpers.js';
+import organizationWorker from '../cloudflare/organization-worker.js';
+import { loadOrganizations, readJson } from './helpers.js';
+
+const hostnameAliases = {
+  nolichucky_family_clinic: 'nolichucky',
+  riverbend_dental_clinic: 'riverbend',
+  united_states_passport_office: 'passport',
+  state_driver_licensing_agency: 'driver-license'
+};
 
 test('all trust relationships resolve to configured organizations', async () => {
   const organizations = await loadOrganizations();
@@ -23,6 +31,29 @@ test('trusted peers expose compatible health, trust, and presentation operations
         assert.ok(peerOperations.has(operation), `${id} cannot interoperate with ${peer.id}: missing ${operation}`);
       }
     }
+  }
+});
+
+test('demo trust policy connects every organization to every other organization', async () => {
+  const organizations = await loadOrganizations();
+  const policy = await readJson('organizations', 'demo-trust-policy.json');
+  assert.equal(policy.mode, 'all-organizations');
+
+  const ids = Object.keys(organizations);
+  for (const id of ids) {
+    const hostname = hostnameAliases[id] || organizations[id].directory;
+    const response = await organizationWorker.fetch(
+      new Request(`https://${hostname}.api.demo.sovereign.ngo/trust`),
+      {}
+    );
+    assert.equal(response.status, 200);
+    const trust = await response.json();
+    assert.equal(trust.organizationId, id);
+    assert.equal(trust.trustedOrganizations.length, ids.length - 1);
+    assert.deepEqual(
+      new Set(trust.trustedOrganizations.map((peer) => peer.id)),
+      new Set(ids.filter((peerId) => peerId !== id))
+    );
   }
 });
 
