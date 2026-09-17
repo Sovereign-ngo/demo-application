@@ -6,3 +6,4 @@ wrangler.jsonc
 !wrangler.example.jsonc
 webapp/dist/
 organizations/*/dist/
+cloudflare/organization-assets/

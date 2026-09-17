@@ -1,5 +1,5 @@
 {
-  "name": "sovereign-demo-organization",
+  "name": "sovereign-organizations",
   "main": "./organization-worker.js",
   "compatibility_date": "2026-09-12",
   "observability": { "enabled": true },
@@ -9,8 +9,15 @@
     "APP_URL": "https://demo.sovereign.ngo/",
     "PODS_URL": "https://pods.demo.sovereign.ngo/"
   },
+  "workers_dev": false,
+  "routes": [
+    {
+      "pattern": "*.api.demo.sovereign.ngo/*",
+      "zone_name": "sovereign.ngo"
+    }
+  ],
   "assets": {
-    "directory": "../organizations/nolichucky-family-clinic/dist",
+    "directory": "./organization-assets",
     "binding": "ASSETS",
     "run_worker_first": true
   }

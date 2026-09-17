@@ -55,7 +55,7 @@ This demo shows a practical alternative:
 ## Current Delivery Modes
 
 - Local Docker Compose mode for the website, webapp, Solid server, and organization fleet.
-- Cloudflare mode for static sites, organization Workers, and the CSS container wrapper.
+- Cloudflare mode for static sites, one shared organizations Worker, and the CSS container wrapper.
 
 ## Decision Guidance
 

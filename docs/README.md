@@ -51,7 +51,7 @@ Organization portal source is owned and deployed by each organization. Each port
 ## Runtime Modes
 
 - **Local Compose mode**: the website, webapp, 49 organization services, and unmodified Community Solid Server run entirely on the local machine.
-- **Cloudflare mode**: static sites and organization Workers use the same built assets and Worker source; CSS runs in its dedicated container wrapper.
+- **Cloudflare mode**: static sites and the shared organizations Worker use the same built assets and Worker source; CSS runs in its dedicated container wrapper.
 
 Browser state is only an in-memory working copy. The selected Solid pod resource is authoritative; the Solid-OIDC library retains only authentication session material.
 

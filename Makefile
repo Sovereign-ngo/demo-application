@@ -28,8 +28,8 @@ help:
 		'make test-journeys       Run tutorial journey tests' \
 		'make test-deployed-journeys  Exercise journeys against the deployed services' \
 		'make cloudflare-check    Dry-run every Cloudflare deployment' \
-		'make cloudflare-check-organizations   Dry-run every organization Worker' \
-		'make cloudflare-deploy-organizations  Deploy every organization Worker' \
+		'make cloudflare-check-organizations   Dry-run the shared organizations Worker' \
+		'make cloudflare-deploy-organizations  Deploy the shared organizations Worker' \
 		'make cloudflare-dev-pods     Run the Solid pod Worker locally with Wrangler' \
 		'make cloudflare-deploy-pods  Deploy the Solid pod Worker and CSS container'
 
@@ -94,10 +94,10 @@ cloudflare-check-app: build-webapp
 	$(WRANGLER) deploy --dry-run --config cloudflare/wrangler.app.jsonc
 
 cloudflare-check-organizations: build-organization-portals
-	node cloudflare/deploy-organizations.mjs --dry-run
+	$(WRANGLER) deploy --dry-run --config cloudflare/wrangler.organization.jsonc
 
 cloudflare-deploy-organizations: build-organization-portals
-	node cloudflare/deploy-organizations.mjs
+	$(WRANGLER) deploy --config cloudflare/wrangler.organization.jsonc
 
 cloudflare-dev-pods:
 	$(WRANGLER) dev --config cloudflare/wrangler.pods.jsonc

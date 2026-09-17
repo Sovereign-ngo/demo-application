@@ -7,6 +7,9 @@ const organizations = organizationEntries
   .filter((entry) => entry.isDirectory() && entry.name !== 'shared')
   .map((entry) => entry.name)
   .sort();
+const cloudflareOutput = resolve(root, 'cloudflare', 'organization-assets');
+await rm(cloudflareOutput, { recursive: true, force: true });
+await mkdir(cloudflareOutput, { recursive: true });
 const sharedBehaviors = JSON.parse(await readFile(
   resolve(root, 'organizations', 'nolichucky-family-clinic', 'behaviors.json'),
   'utf8'
@@ -55,4 +58,6 @@ for (const organization of organizations) {
       `window.SovereignVerifierProfiles = Object.freeze(${JSON.stringify(browserConfig)});\n`
     );
   }
+
+  await cp(output, resolve(cloudflareOutput, organization), { recursive: true });
 }

@@ -74,16 +74,16 @@ The organization containers and production deployments execute the same shared `
 
 Compose passes the public browser URLs to the app container as environment variables. The standard Nginx entrypoint expands them into `/config.js` when the container starts. Cloudflare serves the webapp as static assets, including a production `config.js`; the browser application code is identical across local, preview, and production deployments.
 
-Each of the 49 organizations owns its portal source, entity definition, API surface, trust manifest, local container, production Worker deployment, hostname, and OIDC browser session. The generic organization build packages shared browser libraries into each organization's generated static artifact. The shared Worker is stateless runtime code, not a shared deployment. There is no central API or organization directory service. Each organization's `/trust` endpoint identifies the peers and relationships it accepts.
+Each of the 49 organizations owns its portal source, entity definition, API surface, trust manifest, local container, hostname, and OIDC browser session. The generic organization build packages shared browser libraries into each organization's generated static artifact. Production serves all of those artifacts and APIs from one stateless `sovereign-organizations` Worker, selecting the organization from the request hostname. There is no central organization directory API. Each organization's `/trust` endpoint identifies the peers and relationships it accepts.
 
-For this demo, organization Workers are checked and deployed as a fleet. The fleet runner discovers every organization definition and applies its values to the single `cloudflare/wrangler.organization.jsonc` configuration:
+For this demo, all organizations are checked and deployed together using the single `cloudflare/wrangler.organization.jsonc` configuration:
 
 ```bash
 make cloudflare-check-organizations
 make cloudflare-deploy-organizations
 ```
 
-The Cloudflare Git build for the organization fleet can therefore use `make install` as its build command and `make cloudflare-deploy-organizations` as its deploy command.
+The Cloudflare Git build for the organizations Worker can therefore use `make install` as its build command and `make cloudflare-deploy-organizations` as its deploy command. Its wildcard route requires a proxied `*.api.demo.sovereign.ngo` DNS record in the `sovereign.ngo` zone.
 
 ## Cloudflare deployment
 
