@@ -46,17 +46,7 @@ r2_endpoint="https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com"
 mkdir -p "$mount_path"
 
 echo "[css-r2-wrapper] mounting R2 bucket at $mount_path"
-tigrisfs \
-  --endpoint "$r2_endpoint" \
-  --region auto \
-  --list-type 2 \
-  --uid 0 \
-  --gid 0 \
-  --dir-mode 0770 \
-  --file-mode 0660 \
-  -f \
-  "$R2_BUCKET_NAME" \
-  "$mount_path" &
+tigrisfs --endpoint "$r2_endpoint" -f "$R2_BUCKET_NAME" "$mount_path" &
 fuse_pid=$!
 
 mounted=false

@@ -14,7 +14,9 @@ export class SolidPodContainer extends DurableObject {
     this.env = env;
     this.ready = false;
     this.startInFlight = null;
-    ctx.container.setInactivityTimeout(30 * 60 * 1000);
+    ctx.blockConcurrencyWhile(() =>
+      ctx.container.setInactivityTimeout(30 * 60 * 1000)
+    );
   }
 
   startOptions() {
@@ -52,20 +54,25 @@ export class SolidPodContainer extends DurableObject {
 
   async startAndWait() {
     const container = this.ctx.container;
-    if (!container.running) container.start(this.startOptions());
-
     const port = container.getTcpPort(CONTAINER_PORT);
     const attempts = Math.ceil(START_TIMEOUT_MS / POLL_INTERVAL_MS);
+    let startRequested = container.running;
     let lastError;
 
     for (let attempt = 0; attempt < attempts; attempt += 1) {
       try {
+        if (!startRequested) {
+          container.start(this.startOptions());
+          startRequested = true;
+        }
         const response = await port.fetch('http://containerstarthealthcheck');
         await response.body?.cancel();
         return port;
       } catch (error) {
         lastError = error;
-        if (!container.running) throw error;
+        // start() only requests an instance; running can remain false while
+        // Cloudflare provisions its VM. Keep the triggering request queued
+        // until the port is ready instead of making it the failed wake-up hit.
         await new Promise((resolve) => setTimeout(resolve, POLL_INTERVAL_MS));
       }
     }
